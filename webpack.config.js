@@ -28,11 +28,11 @@ Encore
 
     //SCCS
     //.addStyleEntry('css/app', './assets/css/app.scss')
+    .addStyleEntry('css/bootstrap', './assets/css/bootstrap.css')
 
     //JS
-
-    .addEntry('js/app', './assets/js/app.js')
-
+    //.addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/bootstrap', './assets/js/bootstrap.js')
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
