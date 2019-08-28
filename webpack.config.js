@@ -30,6 +30,7 @@ Encore
     //.addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/bootstrap', './assets/css/bootstrap.css')
     .addStyleEntry('css/baseStyles', './assets/css/baseStyles.scss')
+    .addStyleEntry('css/index/index', './assets/css/index/index.scss')
 
     //JS
     //.addEntry('js/app', './assets/js/app.js')
