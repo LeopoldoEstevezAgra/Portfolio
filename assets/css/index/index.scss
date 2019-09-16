@@ -71,3 +71,9 @@ html{
     opacity: 0;
   }
 }
+
+.diagonalImg{
+  width: 100%;
+  height: 50vh;
+  background-image: linear-gradient(to top right,#000000 50%, #ffffff 50%);
+}
