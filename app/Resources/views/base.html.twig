@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <title>
-            {% block title %}Welcome!{% endblock %}
+            {% block title %}
+                {% trans %}main_title{% endtrans %}
+        {% endblock %}
         </title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{asset('build/css/bootstrap.css')}}">
