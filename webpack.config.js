@@ -2,8 +2,6 @@ var Encore = require('@symfony/webpack-encore');
 
 var webpack = require('webpack');
 
-
-
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('web/build/')
@@ -33,7 +31,8 @@ Encore
     .addStyleEntry('css/index/index', './assets/css/index/index.scss')
 
     //JS
-    //.addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/jquery', './assets/js/jquery.js')
     .addEntry('js/bootstrap', './assets/js/bootstrap.js')
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -47,7 +46,6 @@ Encore
 
     .autoProvidejQuery()
 
-
     // uncomment if you use Sass/SCSS files
     .enableSassLoader(function (sassOptions) { }, {
         resolveUrlLoader: false
@@ -55,10 +53,6 @@ Encore
 
     .enableSassLoader()
 
-    // uncomment if you're having problems with a jQuery plugin
-
-
-
-    ;
+;
 
 module.exports = Encore.getWebpackConfig();
