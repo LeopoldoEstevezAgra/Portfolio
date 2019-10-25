@@ -37,9 +37,10 @@ Encore
 
     .addStyleEntry('css/admin/sidebar', './assets/css/admin/sidebar.scss')
     .addStyleEntry('css/admin/index', './assets/css/admin/index.scss')
+    .addStyleEntry('css/admin/adminBase', './assets/css/admin/adminBase.scss')
 
     //JS
-    //.addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/bootstrap', './assets/js/bootstrap.js')
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
