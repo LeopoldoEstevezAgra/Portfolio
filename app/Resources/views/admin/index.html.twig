@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin Dashboard
+{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{asset('build/css/admin/sidebar.css')}}">
+    <link rel="stylesheet" href="{{asset('build/css/admin/index.css')}}">
+
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="sidebar">
+        <div class="userImgContainer">
+            <div class="userImg">
+                <i class="fas fa-user userImgCenter"></i>
+            </div>
+        </div>
+        <a class="active" href="#">Home</a>
+        <a href="#">Users</a>
+        <a href="{{path('admin_projects')}}">Projects</a>
+
+    </div>
+    <div class="content container-fluid">
+        {% block content%}
+    
+        {% endblock %}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+
+{% endblock %}

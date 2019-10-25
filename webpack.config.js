@@ -28,7 +28,13 @@ Encore
     //.addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/bootstrap', './assets/css/bootstrap.css')
     .addStyleEntry('css/baseStyles', './assets/css/baseStyles.scss')
+
+    .addStyleEntry('css/security/register', './assets/css/security/register.scss')
+
     .addStyleEntry('css/index/index', './assets/css/index/index.scss')
+
+    .addStyleEntry('css/admin/sidebar', './assets/css/admin/sidebar.scss')
+    .addStyleEntry('css/admin/index', './assets/css/admin/index.scss')
 
     //JS
     .addEntry('js/app', './assets/js/app.js')
