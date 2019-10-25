@@ -7,7 +7,7 @@
 {% block stylesheets %}
     {{parent()}}
     <link rel="stylesheet" href="{{asset('build/css/admin/sidebar.css')}}">
-
+    <link rel="stylesheet" href="{{asset('build/css/admin/index.css')}}">
 
 
 {% endblock %}
@@ -23,10 +23,10 @@
         </div>
         <a class="active" href="#">Home</a>
         <a href="#">Users</a>
-        <a href="#">Projects</a>
+        <a href="{{path('admin_projects')}}">Projects</a>
 
     </div>
-    <div class="content">
+    <div class="content container-fluid">
         {% block content%}
     
         {% endblock %}

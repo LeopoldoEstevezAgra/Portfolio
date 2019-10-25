@@ -36,6 +36,7 @@ Encore
     .addStyleEntry('css/index/index', './assets/css/index/index.scss')
 
     .addStyleEntry('css/admin/sidebar', './assets/css/admin/sidebar.scss')
+    .addStyleEntry('css/admin/index', './assets/css/admin/index.scss')
 
     //JS
     //.addEntry('js/app', './assets/js/app.js')
