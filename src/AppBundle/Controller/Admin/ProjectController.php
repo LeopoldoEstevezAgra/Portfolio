@@ -7,10 +7,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use AppBundle\Entity\Project;
 
+/**
+ *@Route ("/admin/projects") 
+*/
+
 class ProjectController extends Controller
 {
     /**
-     *@Route ("/admin/projects",name="admin_projects") 
+     *@Route ("/",name="admin_projects") 
      */
     public function indexAction(Request $request)
     {
@@ -18,11 +22,9 @@ class ProjectController extends Controller
         $projectRepository = $this->getDoctrine()->getRepository(Project::class);
 
         $projects = $projectRepository->findAll();
-        dump($projects);die;
 
         return $this->render('admin/projects/index.html.twig', [
+            "projects" => $projects
         ]);
-
     }
-
 }

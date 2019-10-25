@@ -21,12 +21,31 @@
                 <i class="fas fa-user userImgCenter"></i>
             </div>
         </div>
-        <a class="active" href="#">Home</a>
+
+        {% set route = app.request.pathinfo %}
+
+        {% if "dashboard" in route %}
+            <a class="selected" href="{{path('admin_dashboard')}}">Home</a>
+        {% else %}
+            <a href="{{path('admin_dashboard')}}">Home</a>
+        {% endif %}
         <a href="#">Users</a>
-        <a href="{{path('admin_projects')}}">Projects</a>
+
+        {% if "projects" in route %}
+            <a class="selected" href="{{path('admin_projects')}}">Projects</a>
+        {% else %}
+            <a href="{{path('admin_projects')}}">Projects</a>
+        {% endif %}
 
     </div>
     <div class="content container-fluid">
+            <div>
+                {% block heading %}
+
+                {% endblock %}
+            </div>
+
+
         {% block content%}
     
         {% endblock %}
