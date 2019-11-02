@@ -32,9 +32,9 @@ class ProjectType extends AbstractType
                 ]
             ])
             ->add("Submit",SubmitType::class,[
-                "label" => "Add",
+                "label" => " Add",
                 "attr" => [
-                    "class"=> "fas fa-plus"
+                    "class"=> "fas fa-plus submit-button"
                 ]
             ]);
     }

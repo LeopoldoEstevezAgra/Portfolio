@@ -1,5 +1,19 @@
 {% block content%}
     {{form_start(form)}}
-    {{form_end(form)}}
+    <div>
+        {{form_label(form.Name)}}
+    </div>
+    <div class="mg-bot-15px">
+        {{form_widget(form.Name)}}
+    </div>
 
+    <div>
+        {{form_label(form.Description)}}
+    </div>
+    <div class="mg-bot-15px">
+        {{form_widget(form.Description)}}
+    </div>
+    {{form_widget(form.Submit)}}
+
+    {{form_end(form)}}
 {% endblock %}
