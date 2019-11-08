@@ -22,16 +22,22 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("Name",TextType::class , [
-                "label" => "Title",
+            ->add("name",TextType::class , [
+                "label" => "Title:",
             ])
-            ->add("Description",TextareaType::class, [
-                "label" => "Description",
+            ->add("description",TextareaType::class, [
+                "label" => "Description:",
                 "attr"=>[
                     "rows"=>"10"
                 ]
             ])
-            ->add("Submit",SubmitType::class,[
+            ->add("link",TextType::class , [
+                "label" => "Link:",
+            ])
+            ->add("relatedLink",TextType::class , [
+                "label" => "Related link:",
+            ])
+            ->add("submit",SubmitType::class,[
                 "label" => " Add",
                 "attr" => [
                     "class"=> "fas fa-plus submit-button"
