@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 
 
 class ProjectType extends AbstractType
@@ -28,7 +30,8 @@ class ProjectType extends AbstractType
             ->add("description",TextareaType::class, [
                 "label" => "Description:",
                 "attr"=>[
-                    "rows"=>"10"
+                    "rows"=>"10",
+                    "class"=>"summernote"
                 ]
             ])
             ->add("link",TextType::class , [
@@ -36,6 +39,16 @@ class ProjectType extends AbstractType
             ])
             ->add("relatedLink",TextType::class , [
                 "label" => "Related link:",
+            ])
+
+            ->add("startDate", DateTimeType::class, [
+                "label" => "Start date",
+                "widget" => "single_text",
+                "format" => "dd/MM/yyyy",
+                "attr" => [
+                    "class" => "datepicker",
+                    "data-date-format"=>"dd/mm/yyyy"
+                ]
             ])
             ->add("submit",SubmitType::class,[
                 "label" => " Add",

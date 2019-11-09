@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Project
  *
- * @ORM\Table(name="project")
+ * @ORM\Table(name="projects")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProjectRepository")
  */
 class Project
@@ -24,14 +24,14 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="Name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
@@ -45,14 +45,14 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="Link", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(name="link", type="string", length=255, nullable=true, unique=true)
      */
     private $link;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="RelatedLink", type="string", length=255, nullable=true)
+     * @ORM\Column(name="relatedLink", type="string", length=255, nullable=true)
      */
     private $relatedLink;
 

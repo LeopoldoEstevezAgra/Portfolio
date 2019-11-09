@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=5">
+
+        <meta name="Description" content="Athor : Leopoldo Estévez Agra">
+
         <title>
             {% block title %}
                 {% trans %}main_title{% endtrans %}
@@ -11,9 +15,10 @@
         {#<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">#}
         <link rel="stylesheet" href="{{asset('build/css/bootstrap.css')}}">
         <link rel="stylesheet" href="{{asset('build/css/baseStyles.css')}}">
-
  
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+
 
         {% block stylesheets %}
 
@@ -26,6 +31,8 @@
 
         {% block javascripts %}
         <script src="{{asset('build/js/bootstrap.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
 
         {% endblock %}
     </body>
