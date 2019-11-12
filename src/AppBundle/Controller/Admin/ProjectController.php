@@ -21,10 +21,25 @@ class ProjectController extends Controller
         $this->denyAccessUnlessGranted(["ROLE_ADMIN"]);
         $projectRepository = $this->getDoctrine()->getRepository(Project::class);
 
-        $projects = $projectRepository->findAll();
+        $filter = $request->query->get("filterValue");
+        if( $filter != null){
+            $projects = $projectRepository->getFilterProjects($filter);
+
+        }else{
+            $projects = $projectRepository->findAll();
+
+        }
+
+        $paginator = $this->get("knp_paginator");
+        $result = $paginator->paginate(
+            $projects,
+            $request->query->getInt("page", 1),
+            5 
+        );
+
 
         return $this->render("admin/projects/index.html.twig", [
-            "projects" => $projects
+            "pagination" => $result
         ]);
     }
 

@@ -186,5 +186,10 @@ class Project
     {
         return $this->relatedLink;
     }
+
+    public function getProject()
+    {
+        return $this;
+    }
 }
 
