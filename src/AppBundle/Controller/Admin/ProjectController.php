@@ -67,4 +67,42 @@ class ProjectController extends Controller
             "form"=>$projectForm->createView()
         ]);
     }
+
+    /**
+     *@Route ("/{id}/edit",name="admin_projects_edit") 
+     */
+    public function editAction(Request $request, Project $project)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $editForm = $this->createForm("AppBundle\Form\ProjectType",$project,[
+        ]);
+
+        $editForm->handleRequest($request);
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+                return $this->redirectToRoute("admin_projects");
+
+        }
+        return $this->render("admin/projects/edit.html.twig",[
+            "project"=>$project,
+            "form"=>$editForm->createView()
+        ]);
+    }
+
+    /**
+     *@Route ("/{id}/delete",name="admin_projects_delete") 
+     */
+    public function deleteAction(Request $request, Project $project)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($project);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_projects");
+
+    }
 }
