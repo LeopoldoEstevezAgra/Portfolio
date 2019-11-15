@@ -24,35 +24,57 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(
+     *  name="name",
+     *  type="string",
+     *  length=255
+     * )
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(
+     *  name="description",
+     *  type="string",
+     *  length=255
+     * )
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="datetime")
+     * @ORM\Column(
+     *  name="startDate",
+     *  type="datetime"
+     * )
      */
     private $startDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="link", type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(
+     *  name="link",
+     *  unique=false,
+     *  type="string",
+     *  length=255,
+     *  nullable=true
+     * )
      */
     private $link;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="relatedLink", type="string", length=255, nullable=true)
+     * @ORM\Column(
+     *  name="relatedLink",
+     *  type="string",
+     *  length=255,
+     *  nullable=true
+     * )
      */
     private $relatedLink;
 
