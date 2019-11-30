@@ -9,12 +9,6 @@
 
 ## **ADMIN SIDE**
 
-* CD 04 : Add project management 
-    * Show
-    * Add
-    * Edit
-    * Delete
-
 * CD 08 : Add users management 
 
 ## **COMBINED**
@@ -25,7 +19,9 @@
   * Interests
 
 * CD 07 : Add questions and suggestions chat
+* CD 10 : Add personal post like forum
+* CD 11 : Add more detailed info page for every project
 
 ***
 
-**Note** : Last CD 09
+**Note** : Last CD 12 
