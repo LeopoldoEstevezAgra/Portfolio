@@ -7,7 +7,7 @@
 !/var/cache
 /var/cache/*
 /web/build
-/web/images/uploads/*
+/web/uploads/*
 !var/cache/.gitkeep
 !/var/logs
 /var/logs/*
