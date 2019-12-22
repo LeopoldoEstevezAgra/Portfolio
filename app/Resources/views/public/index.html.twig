@@ -28,11 +28,14 @@
     {% for project in projects %}
     <div class="row project-row">
         {% if counter % 2 == 0 %}
-            <div class="col-4">
-                {{project.name| raw}}
+
+            <div class="col-8 project-title">
+                <div class="v-align-mid">
+                    {{project.name}}
+                </div>
             </div>
             <div class="col-8">
-                {{project.description | raw}}
+                    {{project.description | raw}}
             </div>
 
         {% else %}
@@ -45,9 +48,12 @@
 
         {% endif %}
 
+        {#
         {% if project.imageName %}
             <img src="{{ vich_uploader_asset(project, 'imageFile')}}" alt="img {{project.name}}"/>
         {% endif %}
+        #}
+
 
         {% set counter = counter + 1  %}
         </div>
