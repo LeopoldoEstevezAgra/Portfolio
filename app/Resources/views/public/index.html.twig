@@ -23,40 +23,24 @@
         </div>
     </a>
 <div class="conteiner-fluid projects">
-    {% set counter = 0 %}
-
     {% for project in projects %}
-    <div class="row project-row">
-        {% if counter % 2 == 0 %}
+        <div class="col-12 col-md-6" >
+            <div class="row pro-img" >
 
-            <div class="col-8 project-title">
-                <div class="v-align-mid">
-                    {{project.name}}
-                </div>
-            </div>
-            <div class="col-8">
-                    {{project.description | raw}}
+            <h3>{{project.name}}</h3>
             </div>
 
-        {% else %}
-            <div class="col-8">
+            <div class="row pro-desc" >
                 {{project.description | raw}}
             </div>
-            <div class="col-4">
-                {{project.name| raw}}
+
+            <hr>
+
+            <div class="row " >
+                <a type="button" class="pro-button btn btn-primary">Primary</a>
             </div>
-
-        {% endif %}
-
-        {#
-        {% if project.imageName %}
-            <img src="{{ vich_uploader_asset(project, 'imageFile')}}" alt="img {{project.name}}"/>
-        {% endif %}
-        #}
-
-
-        {% set counter = counter + 1  %}
         </div>
+
     {% endfor %}
 </div>
 
