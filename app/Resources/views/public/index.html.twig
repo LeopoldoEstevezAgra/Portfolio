@@ -25,7 +25,11 @@
 <div class="conteiner-fluid projects">
     {% for project in projects %}
         <div class="col-12 col-md-6" >
-            <div class="row pro-img" >
+            {% if project.imageName %}
+                <div class="row pro-img" style="background-image:url('{{ asset('/uploads/projectImgs/'~project.imageName) }}')" >
+            {% else %}
+                <div class="row pro-img" style="background-image: linear-gradient(to bottom right, cyan, blue);" >
+            {% endif %}
 
             <h3>{{project.name}}</h3>
             </div>

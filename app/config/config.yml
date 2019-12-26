@@ -73,7 +73,7 @@ vich_uploader:
     db_driver: orm
     mappings:
         bug_image:
-            uri_prefix: /uploads/projectImgs
+            uri_prefix: uploads/projectImgs
             upload_destination: '%kernel.project_dir%/web/uploads/projectImgs'
             inject_on_load: false
             delete_on_update: true
