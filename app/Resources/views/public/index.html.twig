@@ -22,9 +22,14 @@
             </div>
         </div>
     </a>
-<div class="conteiner-fluid projects">
+
+<div id="aboutMe" class="container-fluid projects">
+</div>
+
+<div class="container-fluid projects">
+    <h2>{% trans %}My projects{% endtrans %}</h2>
     {% for project in projects %}
-        <div class="col-12 col-md-6" >
+        <div class="col-12 col-md-6 col-lg-4 " >
             {% if project.imageName %}
                 <div class="row pro-img" style="background-image:url('{{ asset('/uploads/projectImgs/'~project.imageName) }}')" >
             {% else %}

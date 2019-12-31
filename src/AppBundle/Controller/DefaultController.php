@@ -15,6 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+
         $projectRepository = $this->getDoctrine()->getRepository(Project::class);
 
         $projects = $projectRepository->findAll();

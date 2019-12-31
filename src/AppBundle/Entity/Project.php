@@ -40,7 +40,7 @@ class Project
      *
      * @ORM\Column(
      *  name="description",
-     *  type="string",
+     *  type="text",
      *  length=255
      * )
      */
