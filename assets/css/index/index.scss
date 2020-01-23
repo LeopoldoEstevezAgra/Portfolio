@@ -72,6 +72,14 @@ html{
   }
 }
 
+.heading-titles{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
 .projects{
   margin-top:20px;
   margin-bottom:20px;
@@ -101,4 +109,13 @@ html{
     margin-left: auto;
     margin-right: auto;
     display:block;
+}
+
+.bussines-card{
+    height: 300px;
+    margin: 7px;
+    border: 1px #b5b5b5 solid ;
+    padding: 20px 10px 10px 10px;
+    box-shadow: 5px 10px 18px #888888;
+
 }
