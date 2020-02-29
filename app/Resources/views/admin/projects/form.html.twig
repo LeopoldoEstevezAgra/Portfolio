@@ -1,8 +1,10 @@
 {% block content%}
     {{form_start(form)}}
+
     <div class="bold">
         {{form_label(form.name)}}
     </div>
+
     <div class="mg-bot-15px">
         {{form_widget(form.name)}}
     </div>
@@ -10,6 +12,7 @@
     <div class="bold">
         {{form_label(form.link)}}
     </div>
+
     <div class="mg-bot-15px">
         {{form_widget(form.link)}}
     </div>
@@ -17,6 +20,7 @@
     <div class="bold">
         {{form_label(form.relatedLink)}}
     </div>
+
     <div class="mg-bot-15px">
         {{form_widget(form.relatedLink)}}
     </div>
@@ -24,6 +28,7 @@
     <div class="bold">
         {{form_label(form.startDate)}}
     </div>
+
     <div class="mg-bot-15px">
         {{form_widget(form.startDate)}}
     </div>
@@ -31,8 +36,13 @@
     <div class="bold">
         {{form_label(form.description)}}
     </div>
+
     <div class="mg-bot-15px">
         {{form_widget(form.description)}}
+    </div>
+
+    <div class="mg-bot-15px">
+        {{form_widget(form.imageFile)}}
     </div>
     {{form_widget(form.submit)}}
 

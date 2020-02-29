@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -55,7 +56,14 @@ class ProjectType extends AbstractType
                 "attr" => [
                     "class"=> "fas fa-plus submit-button"
                 ]
+            ])
+
+            ->add('imageFile', VichImageType::class, [
+                'label'=>'Select an example image ( Optional )',
+                'required' => false,
+                'allow_delete' => true,
             ]);
+
     }
     /**
      * @param OptionsResolver $resolver

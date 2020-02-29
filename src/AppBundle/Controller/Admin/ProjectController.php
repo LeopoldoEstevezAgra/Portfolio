@@ -21,10 +21,25 @@ class ProjectController extends Controller
         $this->denyAccessUnlessGranted(["ROLE_ADMIN"]);
         $projectRepository = $this->getDoctrine()->getRepository(Project::class);
 
-        $projects = $projectRepository->findAll();
+        $filter = $request->query->get("filterValue");
+        if( $filter != null){
+            $projects = $projectRepository->getFilterProjects($filter);
+
+        }else{
+            $projects = $projectRepository->findAll();
+
+        }
+
+        $paginator = $this->get("knp_paginator");
+        $result = $paginator->paginate(
+            $projects,
+            $request->query->getInt("page", 1),
+            5 
+        );
+
 
         return $this->render("admin/projects/index.html.twig", [
-            "projects" => $projects
+            "pagination" => $result
         ]);
     }
 
@@ -51,5 +66,43 @@ class ProjectController extends Controller
             "project"=>$project,
             "form"=>$projectForm->createView()
         ]);
+    }
+
+    /**
+     *@Route ("/{id}/edit",name="admin_projects_edit") 
+     */
+    public function editAction(Request $request, Project $project)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $editForm = $this->createForm("AppBundle\Form\ProjectType",$project,[
+        ]);
+
+        $editForm->handleRequest($request);
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+                return $this->redirectToRoute("admin_projects");
+
+        }
+        return $this->render("admin/projects/edit.html.twig",[
+            "project"=>$project,
+            "form"=>$editForm->createView()
+        ]);
+    }
+
+    /**
+     *@Route ("/{id}/delete",name="admin_projects_delete") 
+     */
+    public function deleteAction(Request $request, Project $project)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($project);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_projects");
+
     }
 }

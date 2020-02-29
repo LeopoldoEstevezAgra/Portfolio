@@ -22,3 +22,17 @@ textarea{
    border: solid rgb(246,241,241);
    border-width: 2px;
 }
+
+.paginator-filter{
+   margin-top: 10px;
+   margin-bottom: 10px;
+
+}
+
+.paginator-filter select{
+   display: none;
+}
+
+.paginator-filter button{
+   display: none;
+}
