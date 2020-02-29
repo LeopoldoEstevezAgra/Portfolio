@@ -1,5 +1,9 @@
 html{
-  scroll-behavior: smooth;
+     scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .no-padding{
@@ -8,9 +12,12 @@ html{
 
 .navbar{
     text-align: center;
-    font-family: 'Josefin Sans', sans-serif;
     font-weight: bold;
     background-color: #f7f7f7;
+}
+
+.navbar-toggler:focus{
+    outline:none;
 }
 
 .main-logo{
