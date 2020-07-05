@@ -1,15 +1,25 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>|
-      <router-link to="/work">Work</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app id="app">
+    <page-header />
+    <v-container fluid class="main-container">
+      <router-view />
+    </v-container>
+  </v-app>
 </template>
+<script>
+import PageHeader from "./views/Header.vue";
 
+export default {
+  name: "App",
+  components: {
+    PageHeader
+  }
+};
+</script>
 <style>
+html{
+  height:100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,17 +27,8 @@
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
+.main-container{
+  height:100%;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
