@@ -17,8 +17,8 @@ export default {
 };
 </script>
 <style>
-html{
-  height:100%;
+html {
+  height: 100%;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -27,8 +27,7 @@ html{
   text-align: center;
   color: #2c3e50;
 }
-.main-container{
-  height:100%;
+.main-container {
+  height: 100%;
 }
-
 </style>

@@ -35,7 +35,7 @@ router.delete('/:id', async (req, res) => {
 async function loadPostColletion() {
   const client = await mongodb.MongoClient.connect
   ('mongodb+srv://Admin:adminTest@cluster0.zcqwd.mongodb.net/vue-portfolio?retryWrites=true&w=majority', {
-
+    useUnifiedTopology: true
   });
   return client.db('vue-portfolio').collection('posts');
 }
