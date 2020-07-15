@@ -1,25 +1,29 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/posts";
+const url = "http://localhost:5000/posts/";
 
 class PostService {
-  //Get Posts
-  static getPosts() {
-    return new Promise((resolve, reject) => {
-      try {
-        const res = axios.get(url);
-        const data = res.data;
-        resolve(
-          data.map(post => ({
-            ...post,
-            createdAt: new Date(post.createdAt)
-          }))
-        );
-        console.log(data);
-      } catch (err) {
-        reject(err);
-      }
+  static async getPosts() {
+    const res = await axios.get(url);
+    try {
+      const data = res.data;
+      return data.map(post => ({
+        ...post,
+        createdAt: new Date(post.createdAt)
+      }));
+    } catch (err) {
+      return err;
+    }
+  }
+
+  static insertPost(text) {
+    return axios.post(url, {
+      text
     });
+  }
+
+  static deletePost(id) {
+    return axios.delete(`${url}${id}`);
   }
 }
 
