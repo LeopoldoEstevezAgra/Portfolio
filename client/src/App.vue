@@ -29,5 +29,6 @@ html {
 }
 .main-container {
   height: 100%;
+  padding: 0;
 }
 </style>

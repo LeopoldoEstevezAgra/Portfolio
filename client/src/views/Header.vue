@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-toolbar flat class="main-navbar " height="125px">
+    <v-toolbar flat class="main-navbar" height="150">
       <router-link to="/" class="router-link">
         <v-toolbar-title>
           <v-btn height="100" width="250" elevation="0" class="">
@@ -12,18 +12,18 @@
       </router-link>
       <v-spacer></v-spacer>
 
-      <router-link to="/about" class="router-link d-none d-md-flex">
-        <v-btn height="100" width="100" elevation="0">
-          <span class="button">
-            About
-          </span>
-        </v-btn>
-      </router-link>
-
       <router-link to="/work" class="router-link d-none d-md-flex">
         <v-btn height="100" width="100" elevation="0" class="value">
           <span class="button">
             Work
+          </span>
+        </v-btn>
+      </router-link>
+
+      <router-link to="/blog" class="router-link d-none d-md-flex">
+        <v-btn height="100" width="100" elevation="0" class="value">
+          <span class="button">
+            Blog
           </span>
         </v-btn>
       </router-link>
@@ -59,8 +59,8 @@ export default {
       drawer: false,
       items: [
         { text: "Home", route: "/" },
-        { text: "About", route: "/about" },
-        { text: "Work", route: "/work" }
+        { text: "Work", route: "/work" },
+        { text: "Blog", route: "/blog" }
       ]
     };
   }
