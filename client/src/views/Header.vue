@@ -3,8 +3,8 @@
     <v-toolbar flat class="main-navbar" height="150">
       <router-link to="/" class="router-link">
         <v-toolbar-title>
-          <v-btn height="100" width="250" elevation="0" class="">
-            <span class="button">
+          <v-btn height="100" width="250" elevation="0" class="button">
+            <span class="button-text">
               Leopoldo Estévez
             </span>
           </v-btn>
@@ -12,17 +12,17 @@
       </router-link>
       <v-spacer></v-spacer>
 
-      <router-link to="/work" class="router-link d-none d-md-flex">
-        <v-btn height="100" width="100" elevation="0" class="value">
-          <span class="button">
+      <router-link router to="/work" class="router-link d-none d-md-flex">
+        <v-btn height="100" width="100" elevation="0" class="value button">
+          <span class="button-text">
             Work
           </span>
         </v-btn>
       </router-link>
 
       <router-link to="/blog" class="router-link d-none d-md-flex">
-        <v-btn height="100" width="100" elevation="0" class="value">
-          <span class="button">
+        <v-btn height="100" width="100" elevation="0" class="value button">
+          <span class="button-text">
             Blog
           </span>
         </v-btn>
@@ -73,9 +73,12 @@ export default {
   margin-right: 15px;
 }
 .main-navbar {
-  background-color: #f5f5f5 !important;
+  background-color: white !important;
 }
 .button {
+  background-color: white !important;
+}
+.button-text {
   font-size: 20px;
 }
 </style>
