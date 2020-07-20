@@ -1,19 +1,15 @@
 <template>
   <v-app id="app">
-    <page-header />
     <v-container fluid class="main-container">
       <router-view />
     </v-container>
   </v-app>
 </template>
 <script>
-import PageHeader from "./views/Header.vue";
 
 export default {
   name: "App",
-  components: {
-    PageHeader
-  }
+  components: {}
 };
 </script>
 <style>
@@ -29,6 +25,6 @@ html {
 }
 .main-container {
   height: 100%;
-  padding: 0;
+  padding: 0 !important;
 }
 </style>

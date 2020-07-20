@@ -38,7 +38,7 @@ export default {
 }
 .image {
   height: 100vh;
-  background-image: url("../assets/landscape.jpg");
+  background-image: url("../../assets/landscape.jpg");
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
