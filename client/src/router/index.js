@@ -4,8 +4,9 @@ import Home from "../views/public/Home.vue";
 import Blog from "../views/public/Blog.vue";
 import Work from "../views/public/Work.vue";
 import Main from "../views/public/Main.vue";
-import Login from "../views/admin/Login.vue";
 import MainAdmin from "../views/admin/MainAdmin.vue";
+import Login from "../views/admin/Login.vue";
+import Register from "../views/admin/Register.vue";
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,11 @@ const routes = [
         path: "login",
         name: "login",
         component: Login
+      },
+      {
+        path: "register",
+        name: "register",
+        component: Register
       }
     ]
   }

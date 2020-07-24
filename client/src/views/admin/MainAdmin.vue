@@ -1,9 +1,6 @@
 <template>
-  <div>
-    test
-    <div class="content">
-      <router-view/>
-    </div>
+  <div class="content">
+    <router-view/>
   </div>
 </template>
 
@@ -15,4 +12,8 @@ export default {
 </script>
 
 <style scoped>
+.content {
+  height: 100% !important;
+  width: 100% !important;
+}
 </style>

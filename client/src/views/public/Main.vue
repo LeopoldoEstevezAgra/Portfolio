@@ -2,7 +2,7 @@
   <div>
     <page-header />
     <div class="content">
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
@@ -17,5 +17,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
