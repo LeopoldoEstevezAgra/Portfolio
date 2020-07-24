@@ -11,11 +11,11 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    label="Username"
-                    name="username"
+                    label="Email"
+                    name="email"
                     prepend-icon="mdi-account"
                     type="text"
-                    v-model="username"
+                    v-model="email"
                   ></v-text-field>
 
                   <v-text-field
@@ -48,16 +48,18 @@ export default {
   name: "Register",
   data() {
     return {
-      username: "",
+      username: "test",
+      email: "",
       password: ""
     };
   },
   methods: {
     async register() {
+      console.log("llego")
       await AuthService.register({
         username: this.username,
         password: this.password,
-        email: "example"
+        email: this.email
       });
     }
   }
