@@ -1,34 +1,21 @@
 <template>
-   <v-app>
+  <v-app>
     <v-main>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
+              <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Register</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    label="Login"
-                    name="login"
+                    label="Username"
+                    name="username"
                     prepend-icon="mdi-account"
                     type="text"
+                    v-model="username"
                   ></v-text-field>
 
                   <v-text-field
@@ -37,12 +24,13 @@
                     name="password"
                     prepend-icon="mdi-lock"
                     type="password"
+                    v-model="password"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">
+                <v-btn color="primary" @click="register">
                   <v-icon>mdi-account-plus</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -52,16 +40,28 @@
       </v-container>
     </v-main>
   </v-app>
-
 </template>
 
 <script>
+import AuthService from "../../services/AuthenticationService";
 export default {
   name: "Register",
-  components: {}
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    async register() {
+      await AuthService.register({
+        username: this.username,
+        password: this.password,
+        email: "example"
+      });
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
-
+<style scoped></style>
