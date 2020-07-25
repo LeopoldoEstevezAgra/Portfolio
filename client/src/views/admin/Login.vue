@@ -20,7 +20,10 @@
                 dark
                 flat
               >
-                <v-toolbar-title>Login</v-toolbar-title>
+                <v-toolbar-title
+                  v-if="!$store.state.isUserLoggedIn"
+                  >Login
+                </v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -70,11 +73,13 @@ export default {
   },
   methods: {
     async login() {
-      await AuthService.login({
+      const response = await AuthService.login({
         username: this.username,
         password: this.password,
         email: this.email
       });
+      this.$store.dispatch("setToken", response.data.token)
+      this.$store.dispatch("setUser", response.data.user)
     }
   }
 };
