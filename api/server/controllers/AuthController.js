@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const User = require('../schemas/user')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 
 mongoose.connect("mongodb+srv://Admin:adminTest@cluster0.zcqwd.mongodb.net/vue-portfolio?retryWrites=true&w=majority",
   {
@@ -9,6 +11,13 @@ mongoose.connect("mongodb+srv://Admin:adminTest@cluster0.zcqwd.mongodb.net/vue-p
     useCreateIndex: true
   });
 
+function jwtSignUser (user) {
+  const ONE_DAY = 60 * 60 * 24
+  console.log(user)
+  return jwt.sign(user,config.authentication.jwtSecret ,{
+    expiresIn: ONE_DAY
+  })
+}
 
 module.exports = {
   async register (req, res) {
@@ -21,11 +30,52 @@ module.exports = {
       user.save(function(err) {
         if (err) throw err;
       });
+      const userJson = user.toJson();
 
-      res.status(201).send();
+      res.status(201).send({
+        user: userJson,
+      });
+
     }catch(err) {
       console.log(err)
       res.status(400).send();
+    }
+  },
+  async login (req, res) {
+    try {
+      console.log(req.body)
+      const {email, password} = req.body;
+
+      const user = await User.findOne({"email": email},function (err, user){
+        if (err) {
+          return handleError(err);
+        }else{
+
+        }
+      }).lean();
+
+      bcrypt.compare(password, user.password, function(err, result) {
+        if(err) {
+          res.status(500).send({
+            error: "An error has occurred"
+          })
+        }else if(result) {
+          res.status(200).send({
+            message: "Found and matched",
+            user,
+            token: jwtSignUser(user)
+          })
+        }else{
+          res.status(403).send({
+            error: "Incorrect credentials"
+          })
+        }
+      })
+
+    }catch(err) {
+      console.log(err);
+      res.status(500).send();
+
     }
   }
 }

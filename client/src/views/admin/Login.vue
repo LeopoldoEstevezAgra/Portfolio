@@ -25,10 +25,11 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    label="Login"
-                    name="login"
+                    label="Email"
+                    name="email"
                     prepend-icon="mdi-account"
                     type="text"
+                    v-model="email"
                   ></v-text-field>
 
                   <v-text-field
@@ -37,12 +38,13 @@
                     name="password"
                     prepend-icon="mdi-lock"
                     type="password"
+                    v-model="password"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">
+                <v-btn color="primary" @click="login">
                   <v-icon>mdi-account-arrow-right</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -56,9 +58,25 @@
 </template>
 
 <script>
+import AuthService from "../../services/AuthenticationService";
 export default {
   name: "Login",
-  components: {}
+  data() {
+    return {
+      username: "test",
+      email: "",
+      password: ""
+    }
+  },
+  methods: {
+    async login() {
+      await AuthService.login({
+        username: this.username,
+        password: this.password,
+        email: this.email
+      });
+    }
+  }
 };
 </script>
 

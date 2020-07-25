@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     async register() {
-      console.log("llego")
       await AuthService.register({
         username: this.username,
         password: this.password,
