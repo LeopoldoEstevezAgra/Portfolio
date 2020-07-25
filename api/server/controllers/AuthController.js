@@ -26,18 +26,16 @@ module.exports = {
       const user = new User(req.body);
       let hash = bcrypt.hashSync(user.password, 10);
       user.password = hash
+      user.role = "USER"
 
       user.save(function(err) {
         if (err) throw err;
       });
-      const userJson = user.toJson();
 
       res.status(201).send({
-        user: userJson,
       });
 
     }catch(err) {
-      console.log(err)
       res.status(400).send();
     }
   },

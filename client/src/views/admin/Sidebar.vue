@@ -1,5 +1,8 @@
 <template>
-  <div class="ma-1 pa-1" v-if="$store.state.isUserLoggedIn">
+  <div
+    class="ma-1 pa-1"
+    v-if="$store.state.isUserLoggedIn && $store.state.isAdmin"
+  >
     <template>
       <v-card>
         <v-navigation-drawer permanent expand-on-hover>
@@ -7,10 +10,10 @@
             <v-list-item link>
               <v-list-item-content>
                 <v-list-item-title class="title">
-                  {{$store.state.user.username}}
+                  {{ $store.state.user.username }}
                 </v-list-item-title>
                 <v-list-item-subtitle>
-                  {{$store.state.user.email}}
+                  {{ $store.state.user.email }}
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -40,10 +43,10 @@ export default {
   name: "Sidebar",
   data() {
     return {
-      drawer: falseadmin/login
+      drawer: false,
       items: [
-        { text: "Projects", route: "/admin/register", icon: "mdi-pencil-box"},
-        { text: "Posts", route: "/admin/login", icon: "mdi-post"},
+        { text: "Projects", route: "/admin/register", icon: "mdi-pencil-box" },
+        { text: "Posts", route: "/admin/login", icon: "mdi-post" }
       ]
     };
   }

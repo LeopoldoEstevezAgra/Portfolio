@@ -5,6 +5,7 @@ var UserSchema = new Schema({
   username: {type: String},
   password: {type: String, required: true},
   email: {type: String, unique: true, required: true},
+  role: {type: String}
 },
   {
     collection: 'auth'
