@@ -1,29 +1,12 @@
 <template>
-   <v-app>
+  <v-app>
     <v-main>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
-                <v-toolbar-title
-                  v-if="!$store.state.isUserLoggedIn"
-                  >Login
-                </v-toolbar-title>
+              <v-toolbar color="primary" dark flat>
+                <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -34,7 +17,6 @@
                     type="text"
                     v-model="email"
                   ></v-text-field>
-
                   <v-text-field
                     id="password"
                     label="Password"
@@ -57,7 +39,6 @@
       </v-container>
     </v-main>
   </v-app>
-
 </template>
 
 <script>
@@ -69,7 +50,7 @@ export default {
       username: "test",
       email: "",
       password: ""
-    }
+    };
   },
   methods: {
     async login() {
@@ -78,13 +59,11 @@ export default {
         password: this.password,
         email: this.email
       });
-      this.$store.dispatch("setToken", response.data.token)
-      this.$store.dispatch("setUser", response.data.user)
+      this.$store.dispatch("setToken", response.data.token);
+      this.$store.dispatch("setUser", response.data.user);
     }
   }
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
