@@ -46,7 +46,8 @@ export default {
       drawer: false,
       items: [
         { text: "Projects", route: "/admin/register", icon: "mdi-pencil-box" },
-        { text: "Posts", route: "/admin/login", icon: "mdi-post" }
+        { text: "Posts", route: "/admin/posts", icon: "mdi-post" },
+        { text: "Users", route: "/admin/users", icon: "mdi-account" }
       ]
     };
   }

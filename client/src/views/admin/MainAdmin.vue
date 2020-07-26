@@ -33,5 +33,8 @@ export default {
   position: absolute;
 }
 .content {
+  padding-left: 70px;
+  padding-right: 1%;
+  padding-top: 8px;
 }
 </style>

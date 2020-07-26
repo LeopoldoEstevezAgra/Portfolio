@@ -5,6 +5,9 @@ const Api = axios.create({
 });
 
 export default {
+  getUsers(isAuthorized) {
+    return Api.post("", isAuthorized);
+  },
   register(credentials) {
     return Api.post("register", credentials);
   },

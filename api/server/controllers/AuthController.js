@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../schemas/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const config = require('../config/config')
+const config = require('../config/config');
 
 mongoose.connect("mongodb+srv://Admin:adminTest@cluster0.zcqwd.mongodb.net/vue-portfolio?retryWrites=true&w=majority",
   {
@@ -13,13 +13,30 @@ mongoose.connect("mongodb+srv://Admin:adminTest@cluster0.zcqwd.mongodb.net/vue-p
 
 function jwtSignUser (user) {
   const ONE_DAY = 60 * 60 * 24
-  console.log(user)
   return jwt.sign(user,config.authentication.jwtSecret ,{
     expiresIn: ONE_DAY
   })
 }
 
 module.exports = {
+  async getUsers (req, res) {
+    try {
+
+      console.log(req.body)
+      var users = await User.find({});
+      var isAuthorized = req.body.isAuthorized;
+
+      if (isAuthorized) {
+        res.status(200).send({
+          users
+        })
+      } else {
+        res.status(401).send()
+      }
+    } catch (err) {
+
+    }
+  },
   async register (req, res) {
     try{
 
@@ -41,7 +58,6 @@ module.exports = {
   },
   async login (req, res) {
     try {
-      console.log(req.body)
       const {email, password} = req.body;
 
       const user = await User.findOne({"email": email},function (err, user){

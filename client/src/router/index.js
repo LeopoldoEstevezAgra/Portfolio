@@ -5,10 +5,20 @@ import Blog from "../views/public/Blog.vue";
 import Work from "../views/public/Work.vue";
 import Main from "../views/public/Main.vue";
 import MainAdmin from "../views/admin/MainAdmin.vue";
-import Login from "../views/admin/Login.vue";
-import Register from "../views/admin/Register.vue";
+import Login from "../views/admin/Auth/Login.vue";
+import Register from "../views/admin/Users/Register.vue";
+import Users from "../views/admin/Users/Users.vue";
+import store from "../store/store";
 
 Vue.use(VueRouter);
+
+function guard(to, from, next) {
+  if (store.state.isAdmin && store.state.isUserLoggedIn) {
+    next();
+  } else {
+    next({ name: "home" });
+  }
+}
 
 const routes = [
   {
@@ -34,6 +44,10 @@ const routes = [
     ]
   },
   {
+    path: "*",
+    redirect: "/"
+  },
+  {
     path: "/admin",
     name: "admin",
     component: MainAdmin,
@@ -46,7 +60,14 @@ const routes = [
       {
         path: "register",
         name: "register",
-        component: Register
+        component: Register,
+        beforeEnter: guard
+      },
+      {
+        path: "users",
+        name: "users",
+        component: Users,
+        beforeEnter: guard
       }
     ]
   }
