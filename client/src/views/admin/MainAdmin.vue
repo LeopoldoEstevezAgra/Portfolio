@@ -28,8 +28,6 @@ export default {
   width: 100% !important;
 }
 .sidebar {
-  float: left;
-  z-index: 9;
   position: absolute;
 }
 .content {

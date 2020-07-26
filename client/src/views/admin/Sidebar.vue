@@ -5,7 +5,7 @@
   >
     <template>
       <v-card>
-        <v-navigation-drawer permanent expand-on-hover>
+        <v-navigation-drawer permanent expand-on-hover fixed>
           <v-list>
             <v-list-item link>
               <v-list-item-content>
@@ -20,7 +20,7 @@
           </v-list>
 
           <v-divider></v-divider>
-          <v-list nav dense>
+          <v-list nav dense class="item-container">
             <v-list-item
               v-for="(item, text) in items"
               :key="text"
@@ -54,8 +54,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.full {
-  height: 100%;
-}
-</style>
+<style scoped></style>
