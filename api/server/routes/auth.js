@@ -17,4 +17,8 @@ router.post ('/',
 router.delete ('/',
   AuthController.deleteItem)
 
+router.put ('/',
+  AuthController.updateItem)
+
+
 module.exports = router;

@@ -16,5 +16,8 @@ export default {
   },
   deleteItem(id) {
     return Api.delete("", {data: id});
+  },
+  updateItem(user) {
+    return Api.put("", user);
   }
 };

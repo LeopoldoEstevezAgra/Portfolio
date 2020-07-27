@@ -38,11 +38,15 @@ module.exports = {
       user.role = "USER"
 
       user.save(function(err) {
-        if (err) throw err;
+        if (err){
+          res.status(400).send({});
+        } else {
+          res.status(201).send({
+          });
+
+        }
       });
 
-      res.status(201).send({
-      });
 
     }catch(err) {
       res.status(400).send();
@@ -63,7 +67,7 @@ module.exports = {
       if (user) {
         bcrypt.compare(password, user.password, function(err, result) {
           if(err) {
-            res.status(500).send({
+            res.status(400).send({
               error: "An error has occurred"
             })
           }else if(result) {
@@ -93,11 +97,27 @@ module.exports = {
   async deleteItem (req, res) {
     await User.deleteOne({ _id: req.body.id }, function (err) {
       if (err) {
-        return handleError(err);
+        res.status(400).send({});
       } else {
         res.status(200).send({});
       }
     });
-
+  },
+  async updateItem (req, res) {
+    try {
+      await User.updateOne({ _id: req.body.id }, {
+        username: req.body.username,
+        email: req.body.email,
+        role: req.body.role
+      },function(err){
+        if (err) {
+          res.status(400).send({});
+        } else {
+          res.status(200).send({});
+        }
+      });
+    } catch(err) {
+      console.log(err)
+    }
   }
 }

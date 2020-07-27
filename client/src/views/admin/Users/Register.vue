@@ -11,9 +11,17 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
+                    label="Username"
+                    name="username"
+                    prepend-icon="mdi-account"
+                    type="text"
+                    v-model="username"
+                  ></v-text-field>
+
+                  <v-text-field
                     label="Email"
                     name="email"
-                    prepend-icon="mdi-account"
+                    prepend-icon="mdi-email"
                     type="text"
                     v-model="email"
                   ></v-text-field>
@@ -48,7 +56,7 @@ export default {
   name: "Register",
   data() {
     return {
-      username: "test",
+      username: "",
       email: "",
       password: ""
     };
