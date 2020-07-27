@@ -13,5 +13,8 @@ export default {
   },
   login(credentials) {
     return Api.post("login", credentials);
+  },
+  deleteItem(id) {
+    return Api.delete("", {data: id});
   }
 };

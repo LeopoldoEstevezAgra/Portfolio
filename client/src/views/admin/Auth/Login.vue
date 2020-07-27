@@ -43,24 +43,34 @@
 
 <script>
 import AuthService from "../../../services/AuthenticationService.js";
+
 export default {
   name: "Login",
   data() {
     return {
-      username: "test",
+      username: "user",
       email: "",
-      password: ""
+      password: "",
+      error: ""
     };
   },
   methods: {
     async login() {
-      const response = await AuthService.login({
-        username: this.username,
-        password: this.password,
-        email: this.email
-      });
-      this.$store.dispatch("setToken", response.data.token);
-      this.$store.dispatch("setUser", response.data.user);
+      try {
+        const response = await AuthService.login({
+          username: this.username,
+          password: this.password,
+          email: this.email
+        });
+
+        this.$store.dispatch("setToken", response.data.token);
+        this.$store.dispatch("setUser", response.data.user);
+      } catch (err) {
+        this.error = "Incorrect credentials";
+      } finally {
+        this.email = "";
+        this.password = "";
+      }
     }
   }
 };

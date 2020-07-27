@@ -14,4 +14,7 @@ router.post ('/login',
 router.post ('/',
   AuthController.getUsers)
 
+router.delete ('/',
+  AuthController.deleteItem)
+
 module.exports = router;

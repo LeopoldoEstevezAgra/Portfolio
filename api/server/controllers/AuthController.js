@@ -22,7 +22,6 @@ module.exports = {
   async getUsers (req, res) {
     try {
 
-      console.log(req.body)
       var users = await User.find({});
       var isAuthorized = req.body.isAuthorized;
 
@@ -68,28 +67,44 @@ module.exports = {
         }
       }).lean();
 
-      bcrypt.compare(password, user.password, function(err, result) {
-        if(err) {
-          res.status(500).send({
-            error: "An error has occurred"
-          })
-        }else if(result) {
-          res.status(200).send({
-            message: "Found and matched",
-            user,
-            token: jwtSignUser(user)
-          })
-        }else{
-          res.status(403).send({
-            error: "Incorrect credentials"
-          })
-        }
-      })
+      if (user) {
+        bcrypt.compare(password, user.password, function(err, result) {
+          if(err) {
+            res.status(500).send({
+              error: "An error has occurred"
+            })
+          }else if(result) {
+            res.status(200).send({
+              message: "Found and matched",
+              user,
+              token: jwtSignUser(user)
+            })
+          }else{
+            res.status(403).send({
+              error: "Incorrect credentials"
+            })
+          }
+        })
+      } else {
+        res.status(403).send({
+          error: "Incorrect credentials"
+        })
+      }
 
     }catch(err) {
       console.log(err);
       res.status(500).send();
 
     }
+  },
+  async deleteItem (req, res) {
+    await User.deleteOne({ _id: req.body.id }, function (err) {
+      if (err) {
+        return handleError(err);
+      } else {
+        res.status(200).send({});
+      }
+    });
+
   }
 }
