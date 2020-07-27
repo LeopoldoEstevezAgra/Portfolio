@@ -1,15 +1,8 @@
-const mongoose = require('mongoose');
 const User = require('../schemas/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config');
-
-mongoose.connect("mongodb+srv://Admin:adminTest@cluster0.zcqwd.mongodb.net/vue-portfolio?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true ,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-  });
+const mongoose = require('../config/mongooseConnect')
 
 function jwtSignUser (user) {
   const ONE_DAY = 60 * 60 * 24

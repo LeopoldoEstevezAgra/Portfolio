@@ -5,7 +5,6 @@
     </div>
     <v-app>
       <v-container>,
-        value: "username"
         <v-data-table
           :headers="headers"
           :items="users"
