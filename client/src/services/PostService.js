@@ -1,30 +1,20 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/posts/";
+const Api = axios.create({
+  baseURL: "http://localhost:5000/posts/"
+});
 
-class PostService {
-  static async getPosts() {
-    const res = await axios.get(url);
-    try {
-      const data = res.data;
-      return data.map(post => ({
-        ...post,
-        createdAt: new Date(post.createdAt)
-      }));
-    } catch (err) {
-      return err;
-    }
-  }
-
-  static insertPost(text) {
-    return axios.post(url, {
-      text
-    });
-  }
-
-  static deletePost(id) {
-    return axios.delete(`${url}${id}`);
+export default {
+  getPosts(isAuthorized) {
+    return Api.post("", isAuthorized);
+  },
+  addPost(post) {
+    return Api.post("post",post);
+  },
+  deleteItem(id) {
+    return Api.delete("", {data: id});
+  },
+  updateItem(post) {
+    return Api.put("", post);
   }
 }
-
-export default PostService;

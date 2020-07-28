@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="title">
-      <h2>Users</h2>
+      <h2>Posts</h2>
     </div>
     <v-app>
       <v-container>
         <v-data-table
           :headers="headers"
-          :items="users"
-          item-key="id"
+          :items="posts"
+          item-key="_id"
           class="elevation-1 table-style"
           :items-per-page="10"
           >
@@ -16,9 +16,7 @@
           <template v-slot:body="{ items }">
             <tbody>
               <tr v-for="item in items" :key="item.id">
-                <td>{{ item.username }}</td>
-                <td>{{ item.email }}</td>
-                <td>{{ item.role }}</td>
+                <td>{{ item.title }}</td>
                 <td>
                   <v-dialog max-width="400px">
                     <template v-slot:activator="{ on, attr }">
@@ -41,23 +39,21 @@
                       </v-card-title>
                       <v-card-text>
                         <v-form>
-                          <v-text-field label="Name" v-model="editedItem.username">
+                          <v-text-field label="Title" v-model="editedItem.title">
                           </v-text-field>
-                          <v-text-field label="Email" v-model="editedItem.email">
-                          </v-text-field>
-                          <v-text-field label="Role" v-model="editedItem.role">
-                          </v-text-field>
+                          <v-textarea label="Content" v-model="editedItem.body">
+                          </v-textarea>
                         </v-form>
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="editUser(editedItem)">
+                        <v-btn color="blue darken-1" text @click="editPost(editedItem)">
                           Save
                         </v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
-                  <v-btn text icon x-small @click="deleteUser(item)">
+                  <v-btn text icon x-small @click="deletePost(item)">
                     <v-icon>
                       mdi-delete
                     </v-icon>
@@ -69,36 +65,34 @@
         </v-data-table>
         <v-dialog max-width="400px">
           <template v-slot:activator="{ on, attr }">
-            <v-btn
-              class="my-2 float-right mr-5 mt-5"
-              color="primary"
-              fab
-              dark
-              v-on="on"
-              v-bind="attr"
-              >
-              <v-icon>
-                mdi-plus
-              </v-icon>
-            </v-btn>
+              <v-btn
+                color="primary"
+                class="my-2 float-right mr-5 mt-5"
+                fab
+                dark
+                v-on="on"
+                v-bind="attr"
+                >
+                <v-icon>
+                  mdi-plus
+                </v-icon>
+              </v-btn>
           </template>
           <v-card>
             <v-card-title>
-              New User
+              New Post
             </v-card-title>
             <v-card-text>
               <v-form>
-                <v-text-field label="Name" v-model="newItem.username">
+                <v-text-field label="Title" v-model="newItem.title">
                 </v-text-field>
-                <v-text-field label="Email" v-model="newItem.email">
-                </v-text-field>
-                <v-text-field label="Password" type="password" v-model="newItem.password">
-                </v-text-field>
+                <v-textarea label="Content" v-model="newItem.body">
+                </v-textarea>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="register(newItem)">
+              <v-btn color="blue darken-1" text @click="addPost(newItem)">
                 Save
               </v-btn>
             </v-card-actions>
@@ -110,41 +104,28 @@
 </template>
 
 <script>
-import AuthService from "../../../services/AuthenticationService.js";
+import PostService from "../../../services/PostService.js";
 export default {
-  name: "Users",
+  name: "Posts",
   data() {
     return {
       error: "",
-      users: [],
+      posts: [],
       editedIndex: -1,
       editedItem: {
-        id: "",
-        username: "",
-        email: "",
-        role: "",
+        title: "",
+        body: "",
       },
       newItem: {
-        username: "",
-        email: "",
+        title: "",
+        body: "",
         password: "",
       },
       headers: [
         {
-          text: "Username",
+          text: "Title",
           align: "center",
-          value: "username"
-        },
-        {
-          text: "Email",
-          align: "center",
-          value: "email"
-
-        },
-        {
-          text: "Role",
-          align: "center",
-          value: "role"
+          value: "title"
         },
         {
           text: "",
@@ -161,10 +142,12 @@ export default {
         isAuthorized = true;
       }
 
-      this.users = await AuthService.getUsers({
+      const posts = await PostService.getPosts({
         isAuthorized: isAuthorized
       });
-      this.users = this.users.data.users;
+
+      this.posts = posts.data.posts;
+
     } catch (err) {
       this.error = err.message;
     }
@@ -175,65 +158,50 @@ export default {
         return true;
       } else {
         return false;
-
       }
     },
-    async deleteUser(user) {
-
+    async loadPosts() {
+      const posts = await PostService.getPosts({
+        isAuthorized: true
+      });
+      this.posts = posts.data.posts;
+    },
+    async deletePost(post) {
       if (this.isAuthorizedUser()) {
-        await AuthService.deleteItem({
-          id: user._id,
+        await PostService.deleteItem({
+          id: post._id,
         });
-
-        this.users = await AuthService.getUsers({
-          isAuthorized: true
-        });
-        this.users = this.users.data.users;
+        this.loadPosts();
       }
-
     },
-    loadEdit(user) {
-      this.editedItem.id = user._id;
-      this.editedItem.username = user.username;
-      this.editedItem.email = user.email;
-      this.editedItem.role = user.role;
+    loadEdit(post) {
+      this.editedItem.id = post._id;
+      this.editedItem.title = post.title;
+      this.editedItem.body = post.body;
     },
-    async editUser(user) {
+    async editPost(post) {
       if (this.isAuthorizedUser()) {
-        await AuthService.updateItem({
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          role: user.role
+        await PostService.updateItem({
+          id: post.id,
+          title: post.title,
+          body: post.body,
         });
 
-        this.users = await AuthService.getUsers({
-          isAuthorized: true
-        });
-        this.users = this.users.data.users;
       }
     },
-    resetNewUser() {
-      this.newItem.username = "";
-      this.newItem.email = "";
-      this.newItem.password = "";
-
+    resetNewPost() {
+      this.newItem.title = "";
+      this.newItem.body = "";
     },
-    async register(user) {
+    async addPost(post) {
       if (this.isAuthorizedUser()) {
-
-        await AuthService.register({
-          username: user.username,
-          password: user.password,
-          email:  user.email
+        await PostService.addPost({
+          title: post.title,
+          body: post.body,
         });
-        this.users = await AuthService.getUsers({
-          isAuthorized: true
-        });
-        this.users = this.users.data.users;
+        this.loadPosts();
       }
-      this.resetNewUser();
-
+      this.resetNewPost();
     }
   }
 };

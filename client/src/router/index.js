@@ -8,6 +8,7 @@ import MainAdmin from "../views/admin/MainAdmin.vue";
 import Login from "../views/admin/Auth/Login.vue";
 import Register from "../views/admin/Users/Register.vue";
 import Users from "../views/admin/Users/Users.vue";
+import Posts from "../views/admin/Posts/Posts.vue";
 import store from "../store/store";
 
 Vue.use(VueRouter);
@@ -67,6 +68,12 @@ const routes = [
         path: "users",
         name: "users",
         component: Users,
+        beforeEnter: guard
+      },
+      {
+        path: "posts",
+        name: "posts",
+        component: Posts,
         beforeEnter: guard
       }
     ]
