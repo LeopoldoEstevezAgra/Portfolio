@@ -15,7 +15,7 @@ export default {
     return Api.post("login", credentials);
   },
   deleteItem(id) {
-    return Api.delete("", {data: id});
+    return Api.delete("", { data: id });
   },
   updateItem(user) {
     return Api.put("", user);

@@ -9,12 +9,12 @@ export default {
     return Api.post("", isAuthorized);
   },
   addPost(post) {
-    return Api.post("post",post);
+    return Api.post("post", post);
   },
   deleteItem(id) {
-    return Api.delete("", {data: id});
+    return Api.delete("", { data: id });
   },
   updateItem(post) {
     return Api.put("", post);
   }
-}
+};

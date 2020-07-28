@@ -11,8 +11,7 @@
           item-key="_id"
           class="elevation-1 table-style"
           :items-per-page="10"
-          >
-
+        >
           <template v-slot:body="{ items }">
             <tbody>
               <tr v-for="item in items" :key="item.id">
@@ -27,7 +26,7 @@
                         v-on="on"
                         v-bind="attr"
                         @click="loadEdit(item)"
-                        >
+                      >
                         <v-icon>
                           mdi-pencil
                         </v-icon>
@@ -39,7 +38,10 @@
                       </v-card-title>
                       <v-card-text>
                         <v-form>
-                          <v-text-field label="Title" v-model="editedItem.title">
+                          <v-text-field
+                            label="Title"
+                            v-model="editedItem.title"
+                          >
                           </v-text-field>
                           <v-textarea label="Content" v-model="editedItem.body">
                           </v-textarea>
@@ -47,7 +49,11 @@
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="editPost(editedItem)">
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          @click="editPost(editedItem)"
+                        >
                           Save
                         </v-btn>
                       </v-card-actions>
@@ -65,18 +71,18 @@
         </v-data-table>
         <v-dialog max-width="400px">
           <template v-slot:activator="{ on, attr }">
-              <v-btn
-                color="primary"
-                class="my-2 float-right mr-5 mt-5"
-                fab
-                dark
-                v-on="on"
-                v-bind="attr"
-                >
-                <v-icon>
-                  mdi-plus
-                </v-icon>
-              </v-btn>
+            <v-btn
+              color="primary"
+              class="my-2 float-right mr-5 mt-5"
+              fab
+              dark
+              v-on="on"
+              v-bind="attr"
+            >
+              <v-icon>
+                mdi-plus
+              </v-icon>
+            </v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -114,12 +120,12 @@ export default {
       editedIndex: -1,
       editedItem: {
         title: "",
-        body: "",
+        body: ""
       },
       newItem: {
         title: "",
         body: "",
-        password: "",
+        password: ""
       },
       headers: [
         {
@@ -132,7 +138,7 @@ export default {
           align: "center",
           sortable: false
         }
-      ],
+      ]
     };
   },
   async created() {
@@ -147,7 +153,6 @@ export default {
       });
 
       this.posts = posts.data.posts;
-
     } catch (err) {
       this.error = err.message;
     }
@@ -169,7 +174,7 @@ export default {
     async deletePost(post) {
       if (this.isAuthorizedUser()) {
         await PostService.deleteItem({
-          id: post._id,
+          id: post._id
         });
         this.loadPosts();
       }
@@ -184,9 +189,8 @@ export default {
         await PostService.updateItem({
           id: post.id,
           title: post.title,
-          body: post.body,
+          body: post.body
         });
-
       }
     },
     resetNewPost() {
@@ -197,7 +201,7 @@ export default {
       if (this.isAuthorizedUser()) {
         await PostService.addPost({
           title: post.title,
-          body: post.body,
+          body: post.body
         });
         this.loadPosts();
       }

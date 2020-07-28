@@ -11,8 +11,7 @@
           item-key="id"
           class="elevation-1 table-style"
           :items-per-page="10"
-          >
-
+        >
           <template v-slot:body="{ items }">
             <tbody>
               <tr v-for="item in items" :key="item.id">
@@ -29,7 +28,7 @@
                         v-on="on"
                         v-bind="attr"
                         @click="loadEdit(item)"
-                        >
+                      >
                         <v-icon>
                           mdi-pencil
                         </v-icon>
@@ -41,9 +40,15 @@
                       </v-card-title>
                       <v-card-text>
                         <v-form>
-                          <v-text-field label="Name" v-model="editedItem.username">
+                          <v-text-field
+                            label="Name"
+                            v-model="editedItem.username"
+                          >
                           </v-text-field>
-                          <v-text-field label="Email" v-model="editedItem.email">
+                          <v-text-field
+                            label="Email"
+                            v-model="editedItem.email"
+                          >
                           </v-text-field>
                           <v-text-field label="Role" v-model="editedItem.role">
                           </v-text-field>
@@ -51,7 +56,11 @@
                       </v-card-text>
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="editUser(editedItem)">
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          @click="editUser(editedItem)"
+                        >
                           Save
                         </v-btn>
                       </v-card-actions>
@@ -76,7 +85,7 @@
               dark
               v-on="on"
               v-bind="attr"
-              >
+            >
               <v-icon>
                 mdi-plus
               </v-icon>
@@ -92,7 +101,11 @@
                 </v-text-field>
                 <v-text-field label="Email" v-model="newItem.email">
                 </v-text-field>
-                <v-text-field label="Password" type="password" v-model="newItem.password">
+                <v-text-field
+                  label="Password"
+                  type="password"
+                  v-model="newItem.password"
+                >
                 </v-text-field>
               </v-form>
             </v-card-text>
@@ -122,12 +135,12 @@ export default {
         id: "",
         username: "",
         email: "",
-        role: "",
+        role: ""
       },
       newItem: {
         username: "",
         email: "",
-        password: "",
+        password: ""
       },
       headers: [
         {
@@ -139,7 +152,6 @@ export default {
           text: "Email",
           align: "center",
           value: "email"
-
         },
         {
           text: "Role",
@@ -151,7 +163,7 @@ export default {
           align: "center",
           sortable: false
         }
-      ],
+      ]
     };
   },
   async created() {
@@ -175,14 +187,12 @@ export default {
         return true;
       } else {
         return false;
-
       }
     },
     async deleteUser(user) {
-
       if (this.isAuthorizedUser()) {
         await AuthService.deleteItem({
-          id: user._id,
+          id: user._id
         });
 
         this.users = await AuthService.getUsers({
@@ -190,7 +200,6 @@ export default {
         });
         this.users = this.users.data.users;
       }
-
     },
     loadEdit(user) {
       this.editedItem.id = user._id;
@@ -217,15 +226,13 @@ export default {
       this.newItem.username = "";
       this.newItem.email = "";
       this.newItem.password = "";
-
     },
     async register(user) {
       if (this.isAuthorizedUser()) {
-
         await AuthService.register({
           username: user.username,
           password: user.password,
-          email:  user.email
+          email: user.email
         });
         this.users = await AuthService.getUsers({
           isAuthorized: true
@@ -233,7 +240,6 @@ export default {
         this.users = this.users.data.users;
       }
       this.resetNewUser();
-
     }
   }
 };
