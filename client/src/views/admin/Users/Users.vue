@@ -29,7 +29,7 @@
                         v-on="on"
                         v-bind="attr"
                         @click="loadEdit(item)"
-                      >
+                        >
                         <v-icon>
                           mdi-pencil
                         </v-icon>
@@ -67,6 +67,43 @@
             </tbody>
           </template>
         </v-data-table>
+        <v-dialog max-width="400px">
+          <template v-slot:activator="{ on, attr }">
+            <v-btn
+              icon
+              text
+              x-small
+              v-on="on"
+              v-bind="attr"
+              >
+              <v-icon>
+                mdi-plus
+              </v-icon>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              New User
+            </v-card-title>
+            <v-card-text>
+              <v-form>
+                <v-text-field label="Name" v-model="newItem.username">
+                </v-text-field>
+                <v-text-field label="Email" v-model="newItem.email">
+                </v-text-field>
+                <v-text-field label="Password" type="password" v-model="newItem.password">
+                </v-text-field>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="register(newItem)">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
         <router-link to="/admin/register">
           <div class="my-2 float-right mr-5 mt-5">
             <v-btn color="primary" fab dark>
@@ -93,6 +130,11 @@ export default {
         username: "",
         email: "",
         role: "",
+      },
+      newItem: {
+        username: "",
+        email: "",
+        password: "",
       },
       headers: [
         {
@@ -135,30 +177,36 @@ export default {
     }
   },
   methods: {
-    async deleteUser(user) {
-      var isAuthorized = false;
-
+    isAuthorizedUser() {
       if (this.$store.state.isAdmin && this.$store.state.isUserLoggedIn) {
-        isAuthorized = true;
+        return true;
+      } else {
+        return false;
+
+      }
+    },
+    async deleteUser(user) {
+
+      if (this.isAuthorizedUser()) {
         await AuthService.deleteItem({
           id: user._id,
         });
 
         this.users = await AuthService.getUsers({
-          isAuthorized: isAuthorized
+          isAuthorized: true
         });
         this.users = this.users.data.users;
       }
 
     },
     loadEdit(user) {
-        this.editedItem.id = user._id;
-        this.editedItem.username = user.username;
-        this.editedItem.email = user.email;
-        this.editedItem.role = user.role;
+      this.editedItem.id = user._id;
+      this.editedItem.username = user.username;
+      this.editedItem.email = user.email;
+      this.editedItem.role = user.role;
     },
     async editUser(user) {
-      if (this.$store.state.isAdmin && this.$store.state.isUserLoggedIn) {
+      if (this.isAuthorizedUser()) {
         await AuthService.updateItem({
           id: user.id,
           username: user.username,
@@ -171,6 +219,28 @@ export default {
         });
         this.users = this.users.data.users;
       }
+    },
+    resetNewUser() {
+      this.newItem.username = "";
+      this.newItem.email = "";
+      this.newItem.password = "";
+
+    },
+    async register(user) {
+      if (this.isAuthorizedUser()) {
+
+        await AuthService.register({
+          username: user.username,
+          password: user.password,
+          email:  user.email
+        });
+        this.users = await AuthService.getUsers({
+          isAuthorized: true
+        });
+        this.users = this.users.data.users;
+      }
+      this.resetNewUser();
+
     }
   }
 };
