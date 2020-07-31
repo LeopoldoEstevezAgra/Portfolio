@@ -6,6 +6,9 @@ const router = express.Router();
 router.post ('/',
   PostController.getPosts)
 
+router.get ('/',
+  PostController.getLastPosts)
+
 router.delete ('/',
   PostController.deleteItem)
 

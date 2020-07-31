@@ -1,6 +1,4 @@
 const Post = require("../schemas/post");
-const config = require("../config/config");
-const mongoose = require("../config/mongooseConnect")
 
 module.exports = {
   async getPosts (req, res) {
@@ -20,6 +18,23 @@ module.exports = {
 
     }
   },
+  async getLastPosts (req, res) {
+    try {
+      Post.find({published: true}).limit(5).sort('-postedAt').exec(function(err, posts) {
+        if(err) {
+          res.status(400).send({});
+        } else {
+          res.status(200).send({
+            posts
+          });
+        }
+      });
+
+    } catch (err) {
+      res.status(400).send({});
+    }
+  },
+
   async deleteItem (req, res) {
     await Post.deleteOne({ _id: req.body.id }, function (err) {
       if (err) {
@@ -33,7 +48,10 @@ module.exports = {
     try {
       await Post.updateOne({ _id: req.body.id }, {
         title: req.body.title,
+        author: req.body.author,
+        introduction: req.body.introduction,
         body: req.body.body,
+        published: req.body.published,
       },function(err){
         if (err) {
           res.status(400).send({});
@@ -49,6 +67,10 @@ module.exports = {
     try{
 
       const post = new Post(req.body);
+
+      post.postedAt = new Date();
+
+      post.published = false;
 
       post.save(function(err) {
         if (err){

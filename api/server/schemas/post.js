@@ -3,8 +3,11 @@ var Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
   title: {type: String},
+  introduction: {type: String},
   body: {type: String},
-  author: {type: String}
+  author: {type: String},
+  postedAt: {type: Date},
+  published: {type: Boolean}
 },
   {
     collection: "posts"

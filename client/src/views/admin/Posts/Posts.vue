@@ -17,6 +17,12 @@
               <tr v-for="item in items" :key="item.id">
                 <td>{{ item.title }}</td>
                 <td>
+                  <v-checkbox v-model="item.published" disabled></v-checkbox>
+                </td>
+                <td>
+                  {{ item.postedAt }}
+                </td>
+                <td>
                   <v-dialog max-width="400px">
                     <template v-slot:activator="{ on, attr }">
                       <v-btn
@@ -43,8 +49,23 @@
                             v-model="editedItem.title"
                           >
                           </v-text-field>
+                          <v-text-field
+                            label="Author"
+                            v-model="editedItem.author"
+                          >
+                          </v-text-field>
+                          <v-textarea
+                            label="Introduction"
+                            v-model="editedItem.introduction"
+                          >
+                          </v-textarea>
                           <v-textarea label="Content" v-model="editedItem.body">
                           </v-textarea>
+                          <v-checkbox
+                            label="Published"
+                            v-model="editedItem.published"
+                          >
+                          </v-checkbox>
                         </v-form>
                       </v-card-text>
                       <v-card-actions>
@@ -92,6 +113,10 @@
               <v-form>
                 <v-text-field label="Title" v-model="newItem.title">
                 </v-text-field>
+                <v-text-field label="Author" v-model="newItem.author">
+                </v-text-field>
+                <v-textarea label="Introduction" v-model="newItem.introduction">
+                </v-textarea>
                 <v-textarea label="Content" v-model="newItem.body">
                 </v-textarea>
               </v-form>
@@ -111,6 +136,7 @@
 
 <script>
 import PostService from "../../../services/PostService.js";
+
 export default {
   name: "Posts",
   data() {
@@ -120,10 +146,15 @@ export default {
       editedIndex: -1,
       editedItem: {
         title: "",
-        body: ""
+        author: "",
+        introduction: "",
+        body: "",
+        published: ""
       },
       newItem: {
         title: "",
+        author: "",
+        introduction: "",
         body: "",
         password: ""
       },
@@ -132,6 +163,16 @@ export default {
           text: "Title",
           align: "center",
           value: "title"
+        },
+        {
+          text: "Published",
+          align: "left",
+          value: "published"
+        },
+        {
+          text: "Release date",
+          align: "center",
+          value: "postedAt"
         },
         {
           text: "",
@@ -151,7 +192,6 @@ export default {
       const posts = await PostService.getPosts({
         isAuthorized: isAuthorized
       });
-
       this.posts = posts.data.posts;
     } catch (err) {
       this.error = err.message;
@@ -182,25 +222,36 @@ export default {
     loadEdit(post) {
       this.editedItem.id = post._id;
       this.editedItem.title = post.title;
+      this.editedItem.author = post.author;
+      this.editedItem.introduction = post.introduction;
       this.editedItem.body = post.body;
+      this.editedItem.published = post.published;
     },
     async editPost(post) {
       if (this.isAuthorizedUser()) {
         await PostService.updateItem({
           id: post.id,
+          author: post.author,
+          introduction: post.introduction,
           title: post.title,
-          body: post.body
+          body: post.body,
+          published: post.published
         });
+        this.loadPosts();
       }
     },
     resetNewPost() {
       this.newItem.title = "";
+      this.newItem.author = "";
       this.newItem.body = "";
+      this.newItem.introduction = "";
     },
     async addPost(post) {
       if (this.isAuthorizedUser()) {
         await PostService.addPost({
           title: post.title,
+          author: post.author,
+          introduction: post.introduction,
           body: post.body
         });
         this.loadPosts();
