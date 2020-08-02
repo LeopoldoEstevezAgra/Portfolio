@@ -2,6 +2,7 @@
   <div>
     <div class="title">
       <h2>Posts</h2>
+
     </div>
     <v-app>
       <v-container>
@@ -59,8 +60,8 @@
                             v-model="editedItem.introduction"
                           >
                           </v-textarea>
-                          <v-textarea label="Content" v-model="editedItem.body">
-                          </v-textarea>
+                          <vue-editor label="Content" v-model="editedItem.body">
+                          </vue-editor>
                           <v-checkbox
                             label="Published"
                             v-model="editedItem.published"
@@ -117,8 +118,8 @@
                 </v-text-field>
                 <v-textarea label="Introduction" v-model="newItem.introduction">
                 </v-textarea>
-                <v-textarea label="Content" v-model="newItem.body">
-                </v-textarea>
+                <vue-editor label="Content" v-model="newItem.body">
+                </vue-editor>
               </v-form>
             </v-card-text>
             <v-card-actions>
@@ -136,9 +137,13 @@
 
 <script>
 import PostService from "../../../services/PostService.js";
+import { VueEditor } from "vue2-editor";
 
 export default {
   name: "Posts",
+  components: {
+    VueEditor
+  },
   data() {
     return {
       error: "",
