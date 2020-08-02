@@ -6,6 +6,9 @@ const router = express.Router();
 router.post ('/',
   PostController.getPosts)
 
+router.post ('/detail',
+  PostController.getPostDetail)
+
 router.get ('/',
   PostController.getLastPosts)
 

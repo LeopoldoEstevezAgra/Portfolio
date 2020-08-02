@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/public/Home.vue";
 import Blog from "../views/public/Blogs/BlogsMain.vue";
+import BlogDetail from "../views/public/Blogs/BlogDetail.vue";
 import Work from "../views/public/Work.vue";
 import Main from "../views/public/Main.vue";
 
@@ -42,6 +43,11 @@ const routes = [
         path: "blog",
         name: "blog",
         component: Blog
+      },
+      {
+        path: "blog/:title",
+        name: "blogDetail",
+        component: BlogDetail,
       }
     ]
   },

@@ -34,7 +34,24 @@ module.exports = {
       res.status(400).send({});
     }
   },
+  async getPostDetail (req, res) {
+    try {
+      const title = req.body.title
+      await Post.findOne({"title": title},function (err, post){
+        if (err) {
+          return handleError(err);
+        }else{
+          res.status(200).send({post});
 
+        }
+      }).lean();
+
+     }catch(err) {
+      console.log(err);
+      res.status(500).send();
+
+    }
+  },
   async deleteItem (req, res) {
     await Post.deleteOne({ _id: req.body.id }, function (err) {
       if (err) {

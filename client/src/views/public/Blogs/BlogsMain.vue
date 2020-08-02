@@ -4,8 +4,10 @@
       My little idea drawer
     </div>
     <div class="items" v-for="post in posts" :key="post._id">
-      <h2 class="inner-title" v-html="post.title"></h2>
-      <div class="inner-introduction" v-html="post.introduction"></div>
+      <div @click="goToPost(post.title)">
+        <h2 class="inner-title" v-html="post.title"></h2>
+        <div class="inner-introduction" v-html="post.introduction"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +28,12 @@ export default {
       const posts = await PostService.getLastPosts({});
       this.posts = posts.data.posts;
     } catch (err) {
-      this.error = err.message;
+      this.error = err.message;;
+    }
+  },
+  methods: {
+    goToPost(title) {
+      this.$router.push("/blog/"+title);
     }
   }
 };

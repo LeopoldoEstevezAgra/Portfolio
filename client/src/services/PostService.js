@@ -8,6 +8,9 @@ export default {
   getPosts(isAuthorized) {
     return Api.post("", isAuthorized);
   },
+  getPostDetail(title) {
+    return Api.post("/detail", title)
+  },
   getLastPosts() {
     return Api.get("");
   },
