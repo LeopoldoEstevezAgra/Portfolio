@@ -9,9 +9,11 @@ app.use(cors());
 
 const posts = require('./routes/posts');
 const authentication = require('./routes/auth');
+const projects = require('./routes/projects');
 
 app.use('/posts', posts)
 app.use('/auth', authentication)
+app.use('/projects', projects)
 
 const port = process.env.PORT || 5000;
 

@@ -1,26 +1,26 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: "http://localhost:5000/posts/"
+  baseURL: "http://localhost:5000/projects/"
 });
 
 export default {
-  getPosts(isAuthorized) {
+  getProjects(isAuthorized) {
     return Api.post("", isAuthorized);
   },
-  getPostDetail(title) {
+  getProjectDetail(title) {
     return Api.post("/detail", title);
   },
-  getLastPosts() {
+  getFeaturedProjects() {
     return Api.get("");
   },
-  addPost(post) {
-    return Api.post("post", post);
+  addProject(project) {
+    return Api.post("project", project);
   },
   deleteItem(id) {
     return Api.delete("", { data: id });
   },
-  updateItem(post) {
-    return Api.put("", post);
+  updateItem(project) {
+    return Api.put("", project);
   }
 };

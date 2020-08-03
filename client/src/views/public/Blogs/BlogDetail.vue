@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div class="post-title">
-      {{post.title}}
+    <div class="post-header">
+      <div class="post-title">
+        {{ post.title }}
+      </div>
+      <div class="post-date">
+        {{ date }}
+      </div>
     </div>
     <div class="post-content" v-html="post.body"></div>
   </div>
@@ -16,29 +21,36 @@ export default {
     return {
       post: "",
       error: "",
+      date: ""
     };
   },
   async created() {
     try {
-      console.log(this.$route.params.title)
       const postResponse = await PostService.getPostDetail({
         title: this.$route.params.title
       });
       this.post = postResponse.data.post;
+      this.date = this.post.postedAt.slice(0, 10);
     } catch (err) {
-      this.error = err.message;;
+      this.error = err.message;
     }
   }
 };
 </script>
 <style scoped>
+.post-header {
+  margin-bottom: 3em;
+}
 .post-title {
   font-weight: 900;
   font-size: 2.5em;
-  margin-bottom: 2em;
   width: 50%;
   margin-right: auto;
   margin-left: auto;
+}
+.post-date {
+  font-weight: 900;
+  font-size: 1.5em;
 }
 .post-content {
   width: 70%;
@@ -59,6 +71,5 @@ export default {
   .post-title {
     width: 90%;
   }
-
 }
 </style>

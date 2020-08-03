@@ -7,7 +7,7 @@
       <v-container>
         <v-data-table
           :headers="headers"
-          :items="posts"
+          :items="projects"
           item-key="_id"
           class="elevation-1 table-style"
           :items-per-page="10"
@@ -17,7 +17,7 @@
               <tr v-for="item in items" :key="item.id">
                 <td>{{ item.title }}</td>
                 <td>
-                  <v-checkbox v-model="item.published" disabled></v-checkbox>
+                  <v-checkbox v-model="item.featured" disabled></v-checkbox>
                 </td>
                 <td>
                   {{ item.postedAt }}
@@ -59,11 +59,16 @@
                             v-model="editedItem.introduction"
                           >
                           </v-textarea>
-                          <vue-editor label="Content" v-model="editedItem.body">
-                          </vue-editor>
+                          <v-text-field
+                            label="Repository"
+                            v-model="editedItem.repository"
+                          >
+                          </v-text-field>
+                          <v-text-field label="Link" v-model="editedItem.link">
+                          </v-text-field>
                           <v-checkbox
                             label="Published"
-                            v-model="editedItem.published"
+                            v-model="editedItem.featured"
                           >
                           </v-checkbox>
                         </v-form>
@@ -73,14 +78,14 @@
                         <v-btn
                           color="blue darken-1"
                           text
-                          @click="editPost(editedItem)"
+                          @click="editProject(editedItem)"
                         >
                           Save
                         </v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
-                  <v-btn text icon x-small @click="deletePost(item)">
+                  <v-btn text icon x-small @click="deleteProject(item)">
                     <v-icon>
                       mdi-delete
                     </v-icon>
@@ -107,7 +112,7 @@
           </template>
           <v-card>
             <v-card-title>
-              New Post
+              New Project
             </v-card-title>
             <v-card-text>
               <v-form>
@@ -117,13 +122,15 @@
                 </v-text-field>
                 <v-textarea label="Introduction" v-model="newItem.introduction">
                 </v-textarea>
-                <vue-editor label="Content" v-model="newItem.body">
-                </vue-editor>
+                <v-text-field label="Link" v-model="newItem.link">
+                </v-text-field>
+                <v-text-field label="Repository" v-model="newItem.repository">
+                </v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="addPost(newItem)">
+              <v-btn color="blue darken-1" text @click="addProject(newItem)">
                 Save
               </v-btn>
             </v-card-actions>
@@ -135,32 +142,29 @@
 </template>
 
 <script>
-import PostService from "../../../services/PostService.js";
-import { VueEditor } from "vue2-editor";
+import ProjectService from "../../../services/ProjectService.js";
 
 export default {
   name: "Posts",
-  components: {
-    VueEditor
-  },
   data() {
     return {
       error: "",
-      posts: [],
+      projects: [],
       editedIndex: -1,
       editedItem: {
         title: "",
         author: "",
         introduction: "",
-        body: "",
-        published: ""
+        repository: "",
+        link: "",
+        featured: ""
       },
       newItem: {
         title: "",
         author: "",
         introduction: "",
-        body: "",
-        password: ""
+        link: "",
+        repository: ""
       },
       headers: [
         {
@@ -169,9 +173,9 @@ export default {
           value: "title"
         },
         {
-          text: "Published",
+          text: "Featured",
           align: "left",
-          value: "published"
+          value: "featured"
         },
         {
           text: "Release date",
@@ -193,10 +197,10 @@ export default {
         isAuthorized = true;
       }
 
-      const posts = await PostService.getPosts({
+      const projects = await ProjectService.getProjects({
         isAuthorized: isAuthorized
       });
-      this.posts = posts.data.posts;
+      this.projects = projects.data.projects;
     } catch (err) {
       this.error = err.message;
     }
@@ -209,58 +213,61 @@ export default {
         return false;
       }
     },
-    async loadPosts() {
-      const posts = await PostService.getPosts({
+    async loadProjects() {
+      const projects = await ProjectService.getProjects({
         isAuthorized: true
       });
-      this.posts = posts.data.posts;
+      this.projects = projects.data.projects;
     },
-    async deletePost(post) {
+    async deleteProject(project) {
       if (this.isAuthorizedUser()) {
-        await PostService.deleteItem({
-          id: post._id
+        await ProjectService.deleteItem({
+          id: project._id
         });
-        this.loadPosts();
+        this.loadProjects();
       }
     },
-    loadEdit(post) {
-      this.editedItem.id = post._id;
-      this.editedItem.title = post.title;
-      this.editedItem.author = post.author;
-      this.editedItem.introduction = post.introduction;
-      this.editedItem.body = post.body;
-      this.editedItem.published = post.published;
+    loadEdit(project) {
+      this.editedItem.id = project._id;
+      this.editedItem.title = project.title;
+      this.editedItem.author = project.author;
+      this.editedItem.introduction = project.introduction;
+      this.editedItem.link = project.link;
+      this.editedItem.repository = project.repository;
+      this.editedItem.featured = project.featured;
     },
-    async editPost(post) {
+    async editProject(project) {
       if (this.isAuthorizedUser()) {
-        await PostService.updateItem({
-          id: post.id,
-          author: post.author,
-          introduction: post.introduction,
-          title: post.title,
-          body: post.body,
-          published: post.published
+        await ProjectService.updateItem({
+          id: project.id,
+          author: project.author,
+          introduction: project.introduction,
+          title: project.title,
+          link: project.link,
+          repository: project.repository,
+          featured: project.featured
         });
-        this.loadPosts();
+        this.loadProjects();
       }
     },
-    resetNewPost() {
+    resetNewProject() {
       this.newItem.title = "";
       this.newItem.author = "";
       this.newItem.body = "";
       this.newItem.introduction = "";
     },
-    async addPost(post) {
+    async addProject(project) {
       if (this.isAuthorizedUser()) {
-        await PostService.addPost({
-          title: post.title,
-          author: post.author,
-          introduction: post.introduction,
-          body: post.body
+        await ProjectService.addProject({
+          title: project.title,
+          author: project.author,
+          introduction: project.introduction,
+          link: project.link,
+          repository: project.repository
         });
-        this.loadPosts();
+        this.loadProjects();
       }
-      this.resetNewPost();
+      this.resetNewProject();
     }
   }
 };

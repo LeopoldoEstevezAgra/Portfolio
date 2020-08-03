@@ -28,12 +28,12 @@ export default {
       const posts = await PostService.getLastPosts({});
       this.posts = posts.data.posts;
     } catch (err) {
-      this.error = err.message;;
+      this.error = err.message;
     }
   },
   methods: {
     goToPost(title) {
-      this.$router.push("/blog/"+title);
+      this.$router.push("/blog/" + title);
     }
   }
 };

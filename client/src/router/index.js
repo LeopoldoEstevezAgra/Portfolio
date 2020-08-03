@@ -11,6 +11,7 @@ import Login from "../views/admin/Auth/Login.vue";
 import Register from "../views/admin/Users/Register.vue";
 import Users from "../views/admin/Users/Users.vue";
 import Posts from "../views/admin/Posts/Posts.vue";
+import Projects from "../views/admin/Projects/Projects.vue";
 import store from "../store/store";
 
 Vue.use(VueRouter);
@@ -47,7 +48,7 @@ const routes = [
       {
         path: "blog/:title",
         name: "blogDetail",
-        component: BlogDetail,
+        component: BlogDetail
       }
     ]
   },
@@ -81,6 +82,12 @@ const routes = [
         path: "posts",
         name: "posts",
         component: Posts,
+        beforeEnter: guard
+      },
+      {
+        path: "projects",
+        name: "projects",
+        component: Projects,
         beforeEnter: guard
       }
     ]
