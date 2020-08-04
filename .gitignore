@@ -7,4 +7,4 @@ client/.env.*.local
 client/npm-debug.log*
 
 api/node_modules
-api/server/config/mongooseConnect.js
+api/.env
