@@ -8,9 +8,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const posts = require('./routes/posts');
-const authentication = require('./routes/auth');
-const projects = require('./routes/projects');
+const posts = require('./server/routes/posts');
+const authentication = require('./server/routes/auth');
+const projects = require('./server/routes/projects');
 
 app.use('/posts', posts)
 app.use('/auth', authentication)
@@ -19,7 +19,7 @@ app.use('/projects', projects)
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public/'))
 
-  app.get(/.*/,(req, res) => res.sendFile('/public/index.html'));
+  app.get(/.*/,(req, res) => res.sendFile(__dirname + '/public/index.html'));
 }
 
 const port = process.env.PORT || 5000;
