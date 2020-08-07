@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: "auth/"
+  baseURL: "/api/auth/"
 });
 
 export default {

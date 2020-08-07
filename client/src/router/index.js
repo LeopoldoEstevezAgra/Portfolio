@@ -70,7 +70,6 @@ const routes = [
         path: "register",
         name: "register",
         component: Register,
-        beforeEnter: guard
       },
       {
         path: "users",

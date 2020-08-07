@@ -12,9 +12,9 @@ const posts = require('./server/routes/posts');
 const authentication = require('./server/routes/auth');
 const projects = require('./server/routes/projects');
 
-app.use('/posts', posts)
-app.use('/auth', authentication)
-app.use('/projects', projects)
+app.use('/api/posts', posts)
+app.use('/api/auth', authentication)
+app.use('/api/projects', projects)
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public/'))

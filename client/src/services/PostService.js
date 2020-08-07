@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: "posts/"
+  baseURL: "/api/posts/"
 });
 
 export default {
