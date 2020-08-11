@@ -3,7 +3,7 @@
     <div class="image">
       <div class="home-title">
         Hello! I'm Leo.
-        <br>
+        <br />
         I'm a junior software developer.
       </div>
     </div>
@@ -29,8 +29,9 @@ export default {
   height: 100%;
 }
 .image {
+  min-height: 480px;
   margin-top: -150px;
-  width:100%;
+  width: 100%;
   height: 100vh;
   background-image: url("../../assets/landscape.jpg");
   background-color: gray;
@@ -42,8 +43,6 @@ export default {
 .home-title {
   color: white;
   padding-top: 250px;
-  width:100%;
-  height:100%;
   text-shadow: 1px 1px gray;
 }
 .home-description {
@@ -97,6 +96,12 @@ export default {
   .about-text {
     padding-right: 7%;
     padding-left: 7%;
+  }
+}
+@media only screen and (max-height: 600px) {
+  .home-title {
+    font-size: 5vw !important;
+    padding-top: 150px;
   }
 }
 </style>
