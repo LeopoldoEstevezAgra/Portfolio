@@ -2,12 +2,9 @@
   <div class="home">
     <div class="image">
       <div class="home-title">
-        Amet ipsum
-      </div>
-      <div class="home-description">
-        Ipsum magnam id vero assumenda facere quibusdam suscipit quisquam. Sit
-        culpa officiis dignissimos aut repellendus Inventore maxime ad mollitia
-        nesciunt?
+        Hello! I'm Leo.
+        <br>
+        I'm a junior software developer.
       </div>
     </div>
     <div class="about">
@@ -32,8 +29,11 @@ export default {
   height: 100%;
 }
 .image {
+  margin-top: -150px;
+  width:100%;
   height: 100vh;
   background-image: url("../../assets/landscape.jpg");
+  background-color: gray;
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
@@ -41,7 +41,10 @@ export default {
 }
 .home-title {
   color: white;
-  padding-top: 10%;
+  padding-top: 250px;
+  width:100%;
+  height:100%;
+  text-shadow: 1px 1px gray;
 }
 .home-description {
   color: white;
@@ -51,7 +54,7 @@ export default {
 }
 @media only screen and (max-width: 720px) {
   .home-title {
-    font-size: 14vw !important;
+    font-size: 10vw !important;
   }
   .home-description {
     font-size: 7vw !important;
@@ -75,7 +78,7 @@ export default {
 }
 @media screen and (min-width: 1300px) {
   .home-title {
-    font-size: 5vw !important;
+    font-size: 5.2vw !important;
   }
   .home-description {
     font-size: 2vw !important;

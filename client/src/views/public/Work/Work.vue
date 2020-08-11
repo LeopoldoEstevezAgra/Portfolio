@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="full">
     <div class="projects-title">
       Featured Projects
     </div>
@@ -65,3 +65,4 @@ export default {
   }
 }
 </style>
+
