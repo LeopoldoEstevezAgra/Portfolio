@@ -4,8 +4,10 @@
       <router-link to="/" class="router-link">
         <v-toolbar-title>
           <v-btn height="100" width="250" elevation="0" class="button">
-            <span class="button-text"
-              v-bind:class="{ 'button-text-main': $route.path == '/'}">
+            <span
+              class="button-text"
+              v-bind:class="{ 'button-text-main': $route.path == '/' }"
+            >
               Leopoldo Estévez
             </span>
           </v-btn>
@@ -13,10 +15,24 @@
       </router-link>
       <v-spacer></v-spacer>
 
+      <router-link to="/admin/posts" class="router-link d-none d-md-flex">
+        <v-btn height="100" width="100" elevation="0" class="value button">
+          <span
+            class="button-text"
+            v-bind:class="{ 'button-text-main': $route.path == '/' }"
+            v-if="$store.state.isUserLoggedIn && $store.state.isAdmin"
+          >
+            Admin
+          </span>
+        </v-btn>
+      </router-link>
+
       <router-link router to="/work" class="router-link d-none d-md-flex">
         <v-btn height="100" width="100" elevation="0" class="value button">
-          <span class="button-text"
-              v-bind:class="{ 'button-text-main': $route.path == '/'}">
+          <span
+            class="button-text"
+            v-bind:class="{ 'button-text-main': $route.path == '/' }"
+          >
             Work
           </span>
         </v-btn>
@@ -24,8 +40,10 @@
 
       <router-link to="/blog" class="router-link d-none d-md-flex">
         <v-btn height="100" width="100" elevation="0" class="value button">
-          <span class="button-text"
-              v-bind:class="{ 'button-text-main': $route.path == '/'}">
+          <span
+            class="button-text"
+            v-bind:class="{ 'button-text-main': $route.path == '/' }"
+          >
             Blog
           </span>
         </v-btn>

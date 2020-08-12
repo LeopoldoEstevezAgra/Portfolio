@@ -19,7 +19,8 @@
             </v-list-item>
           </v-list>
 
-          <v-divider></v-divider>
+          <v-divider />
+
           <v-list nav dense class="item-container">
             <v-list-item
               v-for="(item, text) in items"
@@ -31,6 +32,13 @@
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-icon>
               <v-list-item-title>{{ item.text }}</v-list-item-title>
+            </v-list-item>
+            <v-divider />
+            <v-list-item router to="/">
+              <v-list-item-icon>
+                <v-icon>mdi-arrow-left-circle</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Index</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-navigation-drawer>
