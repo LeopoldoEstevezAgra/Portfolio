@@ -40,6 +40,12 @@
               </v-list-item-icon>
               <v-list-item-title>Index</v-list-item-title>
             </v-list-item>
+            <v-list-item router @click="logout">
+              <v-list-item-icon>
+                <v-icon>mdi-arrow-left-circle</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-navigation-drawer>
       </v-card>
@@ -58,6 +64,16 @@ export default {
         { text: "Users", route: "/admin/users", icon: "mdi-account" }
       ]
     };
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch("setToken",null);
+      this.$store.dispatch("setUser",null);
+      console.log("call");
+      this.$router.push({
+        name: "home"
+      })
+    }
   }
 };
 </script>

@@ -1,10 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   strict: true,
+  plugins: [
+    createPersistedState()
+  ],
   state: {
     token: null,
     user: null,
@@ -22,8 +26,12 @@ export default new Vuex.Store({
     },
     setUser(state, user) {
       state.user = user;
-      if (user.role === "ADMIN") {
-        state.isAdmin = true;
+      if(user) {
+        if (user.role === "ADMIN") {
+          state.isAdmin = true;
+        } else {
+          state.isAdmin = false;
+        }
       } else {
         state.isAdmin = false;
       }
