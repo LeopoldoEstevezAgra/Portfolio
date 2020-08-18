@@ -66,13 +66,13 @@ export default {
     };
   },
   methods: {
-    logout () {
-      this.$store.dispatch("setToken",null);
-      this.$store.dispatch("setUser",null);
+    logout() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
       console.log("call");
       this.$router.push({
         name: "home"
-      })
+      });
     }
   }
 };

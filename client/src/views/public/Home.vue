@@ -99,8 +99,7 @@
         </v-row>
       </v-container>
     </div>
-    <div class="contact">
-    </div>
+    <div class="contact"></div>
   </div>
 </template>
 
