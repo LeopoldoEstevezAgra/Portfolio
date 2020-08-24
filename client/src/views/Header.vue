@@ -15,12 +15,15 @@
       </router-link>
       <v-spacer></v-spacer>
 
-      <router-link to="/admin/posts" class="router-link d-none d-md-flex">
+      <router-link
+        to="/admin/posts"
+        class="router-link d-none d-md-flex"
+        v-if="$store.state.isUserLoggedIn && $store.state.isAdmin"
+      >
         <v-btn height="100" width="100" elevation="0" class="value button">
           <span
             class="button-text"
             v-bind:class="{ 'button-text-main': $route.path == '/' }"
-            v-if="$store.state.isUserLoggedIn && $store.state.isAdmin"
           >
             Admin
           </span>

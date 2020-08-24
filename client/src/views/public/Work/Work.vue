@@ -6,6 +6,22 @@
     <div class="items" v-for="project in projects" :key="project._id">
       <h2 class="inner-title" v-html="project.title"></h2>
       <div class="inner-introduction" v-html="project.introduction"></div>
+      <div class="links">
+        <v-btn
+          icon
+          @click="openProject(project.link)"
+          v-if="project.link!==''"
+        >
+          <v-icon>mdi-arrow-right</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          @click="openProject(project.repository)"
+          v-if="project.repository!==''"
+        >
+          <v-icon>mdi-github</v-icon>
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +43,11 @@ export default {
       this.projects = projects.data.projects;
     } catch (err) {
       this.error = err.message;
+    }
+  },
+  methods: {
+    openProject (link) {
+      window.open(link);
     }
   }
 };
@@ -55,6 +76,9 @@ export default {
 }
 .inner-introduction {
   text-align: left;
+}
+.links {
+  margin-left: 60%;
 }
 @media only screen and (max-width: 720px) {
   .projects-title {

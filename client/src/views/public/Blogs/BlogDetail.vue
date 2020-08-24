@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="post-header">
+      <div class="arrow-back d-none d-md-block">
+        <v-btn icon @click="$router.go(-1)">
+          <v-icon large>mdi-arrow-left</v-icon>
+        </v-btn>
+      </div>
       <div class="post-title">
         {{ post.title }}
       </div>
@@ -9,6 +14,11 @@
       </div>
     </div>
     <div class="post-content" v-html="post.body"></div>
+    <div class="arrow-back-small d-md-none">
+      <v-btn fab large color="gray" fixed right bottom @click="$router.go(-1)">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -57,8 +67,14 @@ export default {
   font-weight: 100;
   margin-right: auto;
   margin-left: auto;
+  text-align: left;
+  margin-bottom: 5em;
 }
-
+.arrow-back {
+  float: left;
+  position: absolute;
+  margin-left: 2em;
+}
 @media only screen and (max-width: 720px) {
   .post-title {
     width: 75%;
