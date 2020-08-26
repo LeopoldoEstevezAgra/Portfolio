@@ -10,14 +10,14 @@
         <v-btn
           icon
           @click="openProject(project.link)"
-          v-if="project.link!==''"
+          v-if="project.link !== ''"
         >
           <v-icon>mdi-arrow-right</v-icon>
         </v-btn>
         <v-btn
           icon
           @click="openProject(project.repository)"
-          v-if="project.repository!==''"
+          v-if="project.repository !== ''"
         >
           <v-icon>mdi-github</v-icon>
         </v-btn>
@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    openProject (link) {
+    openProject(link) {
       window.open(link);
     }
   }

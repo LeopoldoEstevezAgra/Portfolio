@@ -42,7 +42,7 @@ export default {
 .blog-title {
   font-weight: 900;
   font-size: 2em;
-  text-align: left;
+  text-align: center;
   width: 50%;
   margin-left: auto;
   margin-right: auto;
