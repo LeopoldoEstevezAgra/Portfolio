@@ -1,5 +1,22 @@
 const Contact = require("../schemas/contact");
 module.exports = {
+  async getContacts (req, res) {
+    try {
+
+      var contacts = await Contact.find({});
+      var isAuthorized = req.body.isAuthorized;
+
+      if (isAuthorized) {
+        res.status(200).send({
+          contacts
+        })
+      } else {
+        res.stposts(401).send()
+      }
+    } catch (err) {
+
+    }
+  },
   async addContact (req, res) {
     try{
 

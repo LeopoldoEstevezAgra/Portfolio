@@ -12,6 +12,7 @@ import Register from "../views/admin/Users/Register.vue";
 import Users from "../views/admin/Users/Users.vue";
 import Posts from "../views/admin/Posts/Posts.vue";
 import Projects from "../views/admin/Projects/Projects.vue";
+import Contacts from "../views/admin/Contact/Contacts.vue";
 import store from "../store/store";
 
 Vue.use(VueRouter);
@@ -87,6 +88,12 @@ const routes = [
         path: "projects",
         name: "projects",
         component: Projects,
+        beforeEnter: guard
+      },
+      {
+        path: "contacts",
+        name: "contacts",
+        component: Contacts,
         beforeEnter: guard
       }
     ]
