@@ -6,6 +6,82 @@
         <br />
         I'm a junior software developer.
       </div>
+      <v-btn
+        icon
+        dark
+        large
+        @click="
+          openLink(
+            'https://www.linkedin.com/in/leopoldo-est%C3%A9vez-agra-78b151164/'
+          )
+        "
+      >
+        <v-icon>mdi-linkedin</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        dark
+        large
+        @click="openLink('https://twitter.com/LeopoldoEstevzA')"
+      >
+        <v-icon>mdi-twitter</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        dark
+        large
+        @click="openLink('https://github.com/LeopoldoEstevezAgra')"
+      >
+        <v-icon>mdi-github</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        dark
+        large
+        @click="openLink('https://www.instagram.com/leopoldoesteveza/')"
+      >
+        <v-icon>mdi-instagram</v-icon>
+      </v-btn>
+      <br />
+      <v-dialog max-width="400px" v-model="dialog">
+        <template v-slot:activator="{ on, attr }">
+          <v-btn icon dark x-large v-on="on" v-bind="attr">
+            <v-icon>
+              mdi-send
+            </v-icon>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            Want to say something ? Send me a message !!
+          </v-card-title>
+          <v-card-text>
+            <v-form>
+              <v-text-field label="Name" v-model="newContact.name">
+              </v-text-field>
+              <v-text-field label="Company" v-model="newContact.company">
+              </v-text-field>
+              <v-text-field label="E-mail" v-model="newContact.email">
+              </v-text-field>
+              <v-textarea label="Comment" v-model="newContact.note">
+              </v-textarea>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue darken-1"
+              text
+              @click="
+                addContact(newContact);
+                dialog = false;
+              "
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
     <div class="about">
       <div class="about-header">
@@ -104,9 +180,41 @@
 </template>
 
 <script>
+import ContactService from "../../services/ContactService.js";
 export default {
   name: "Home",
-  components: {}
+  components: {},
+  data() {
+    return {
+      dialog: false,
+      newContact: {
+        name: "",
+        company: "",
+        email: "",
+        note: ""
+      }
+    };
+  },
+  methods: {
+    openLink(link) {
+      window.open(link);
+    },
+    resetNewContact() {
+      this.newContact.name = "";
+      this.newContact.company = "";
+      this.newContact.email = "";
+      this.newContact.note = "";
+    },
+    async addContact(contact) {
+      await ContactService.addContact({
+        name: contact.name,
+        email: contact.email,
+        company: contact.company,
+        note: contact.note
+      });
+      this.resetNewContact();
+    }
+  }
 };
 </script>
 

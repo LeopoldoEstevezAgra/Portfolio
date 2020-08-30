@@ -11,10 +11,12 @@ app.use(cors());
 const posts = require('./server/routes/posts');
 const authentication = require('./server/routes/auth');
 const projects = require('./server/routes/projects');
+const contact = require('./server/routes/contact');
 
 app.use('/api/posts', posts)
 app.use('/api/auth', authentication)
 app.use('/api/projects', projects)
+app.use('/api/contact', contact)
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public/'))
