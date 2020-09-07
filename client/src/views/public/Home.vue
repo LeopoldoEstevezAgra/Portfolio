@@ -93,7 +93,9 @@
       <v-container fluid>
         <v-row>
           <v-col cols="12" md="6" class="about-photo-container">
-            <div class="about-photo"></div>
+            <div class="about-photo">
+              <img class="img-about" src="../../assets/user2.jpg" alt="">
+            </div>
             <div class="about-text">
               Hey! I'm a
               <span class="about-text-highlight">
@@ -267,13 +269,16 @@ export default {
   max-height: 100%;
   width: 50%;
   vertical-align: middle;
-  background-image: url("../../assets/user.jpg");
-  background-color: gray;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 20px;
   margin: 0 auto;
+}
+.img-about {
+  height: 70%;
+  width: 70%;
+  border-radius: 20px;
 }
 .about-text {
   margin: 20px auto 0 auto;
